@@ -8,4 +8,15 @@ package org.usfirst.frc.team2438.robot;
  */
 public class RobotMap {
 
+    // drive //
+    
+    // intake //
+    
+    // shooter //
+    
+    // camera & distance //
+	
+	// winch //
+	
+	// gear system //
 }
