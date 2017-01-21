@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.usfirst.frc.team2438.robot.RobotMap;
 import org.usfirst.frc.team2438.commands.OperateArcadeDrive;
+import org.usfirst.frc.team2438.commands.OperateTankDrive;
 import org.usfirst.frc.team2438.util.Utility;
 
 import com.ctre.CANTalon.FeedbackDevice;
@@ -71,8 +72,8 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //this.setDefaultCommand(new OperateTankDrive());
-        this.setDefaultCommand(new OperateArcadeDrive());
+        this.setDefaultCommand(new OperateTankDrive());
+        //this.setDefaultCommand(new OperateArcadeDrive());
     }
 
     /**

@@ -8,8 +8,8 @@ import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import org.usfirst.frc.team2438.util.ConditionalButton;
 import org.usfirst.frc.team2438.util.JoystickAxisThresholdButton;
 //import org.iolani.frc.util.PowerScaler;
-import org.usfirst.frc.team2438.commands.*;
-import org.usfirst.frc.team2438.commands.auto.*;
+//import org.usfirst.frc.team2438.commands.*;
+//import org.usfirst.frc.team2438.commands.auto.*;
 //import org.iolani.frc.commands.debug.*;
 
 /**

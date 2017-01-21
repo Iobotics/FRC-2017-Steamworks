@@ -24,11 +24,11 @@ public abstract class CommandBase extends Command {
     public static OI oi;
     // Create a single static instance of all of your subsystems
     public static final DriveTrain       drivetrain    = new DriveTrain();
-    public static final Intake           intake        = new Intake();
-    public static final Agitator         agitator      = new Agitator();
-    public static final Camera           camera        = new Camera();
-    public static final Winch            winch         = new Winch();
-    public static final Shooter          shooter       = new Shooter();
+    //public static final Intake           intake        = new Intake();
+    //public static final Agitator         agitator      = new Agitator();
+    //public static final Camera           camera        = new Camera();
+    //public static final Winch            winch         = new Winch();
+    //public static final Shooter          shooter       = new Shooter();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -40,11 +40,11 @@ public abstract class CommandBase extends Command {
 
         // Show what command your subsystem is running on the SmartDashboard
         drivetrain.init();
-        intake.init();
-        winch.init();
-        agitator.init();
-        shooter.init();
-        camera.init();
+        //intake.init();
+        //winch.init();
+        //agitator.init();
+        //shooter.init();
+        //camera.init();
         //distance.init();
     }
 

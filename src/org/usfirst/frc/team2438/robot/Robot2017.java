@@ -1,6 +1,14 @@
 package org.usfirst.frc.team2438.robot;
 
+import org.usfirst.frc.team2438.commands.CommandBase;
+
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.PowerDistributionPanel;
+import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -12,6 +20,9 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot2017 extends IterativeRobot {
+	PowerDistributionPanel _pdp;
+	Preferences            _prefs;
+	
 	final String defaultAuto = "Default";
 	final String customAuto = "My Auto";
 	String autoSelected;
@@ -23,9 +34,29 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void robotInit() {
+		_pdp = new PowerDistributionPanel();
+    	
+    	_pdp.clearStickyFaults();
+    	
+    	_prefs = Preferences.getInstance();
+        
+    	CommandBase.init();
+		
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
 		SmartDashboard.putData("Auto choices", chooser);
+	}
+	
+	/**
+     * This function is called when the disabled button is hit.
+     * You can use it to reset subsystems before shutting down.
+     */
+    public void disabledInit() {
+    	SmartDashboard.putData(Scheduler.getInstance());
+    }
+    
+	public void disabledPeriodic() {
+		Scheduler.getInstance().run();
 	}
 
 	/**
@@ -48,15 +79,7 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousPeriodic() {
-		switch (autoSelected) {
-		case customAuto:
-			// Put custom auto code here
-			break;
-		case defaultAuto:
-		default:
-			// Put default auto code here
-			break;
-		}
+		Scheduler.getInstance().run();
 	}
 
 	/**
@@ -64,6 +87,7 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void teleopPeriodic() {
+		Scheduler.getInstance().run();
 	}
 
 	/**
@@ -71,6 +95,7 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void testPeriodic() {
+		LiveWindow.run();
 	}
 }
 
