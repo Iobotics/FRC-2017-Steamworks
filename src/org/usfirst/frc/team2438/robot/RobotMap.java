@@ -9,6 +9,12 @@ package org.usfirst.frc.team2438.robot;
 public class RobotMap {
 
     // drive //
+    public static final int driveLeftMain      = 3;
+    public static final int driveLeftSlave1    = 2;
+    public static final int driveLeftSlave2    = 1;
+    public static final int driveRightMain     = 6;
+    public static final int driveRightSlave1   = 5;
+    public static final int driveRightSlave2   = 4;
     
     // intake //
     
