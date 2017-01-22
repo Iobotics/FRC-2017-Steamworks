@@ -21,35 +21,17 @@ public class OI {
 	// joysticks //
     private final Joystick _lStick = new Joystick(1);
     private final Joystick _rStick = new Joystick(2);
-    /*private final Joystick _xStick = new Joystick(3);
     
     // driver buttons //
-    private final Button _intakeButton = new JoystickButton(_rStick, 1);
-    private final Button _outakeButton = new JoystickButton(_lStick, 1);
+    private final Button _intakeButton = new JoystickButton(_rStick, 4);
+    private final Button _outtakeButton = new JoystickButton(_rStick, 5);
     
-    private final Button _ballOperateButton   = new JoystickButton(_lStick, 2);
+    /*private final Button _ballOperateButton   = new JoystickButton(_lStick, 2);
     private final Button _intakeOperateButton = new JoystickButton(_lStick, 5);
     private final Button _auxOperateButton    = new JoystickButton(_lStick, 4);
     
     private final Button _homePositionButton  = new JoystickButton(_rStick, 3);
     private final Button _loadPositionButton  = new JoystickButton(_lStick, 3);
-    
-    private final Button _activateWinchButton = new JoystickButton(_rStick, 2);
-    
-    // gunner buttons //
-    private final Button _gunnerFastButton = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 3));
-    private final Button _gunnerSlowButton = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 4));
-    private final Button _gunnerSpinButton = new ConditionalButton(_gunnerModeState, 
-    			new JoystickAxisThresholdButton(_xStick, XSTICK_LTRIGGER_AXIS, 0.25, 1)
-    		);
-    private final Button _gunnerFireButton = new ConditionalButton(_gunnerModeState, 
-			new JoystickAxisThresholdButton(_xStick, XSTICK_RTRIGGER_AXIS, 0.25, 1)
-		);
-    private final Button _gunnerHomeButton   = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 5));
-    private final Button _gunnerSuckButton   = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 6));
-    private final Button _gunnerDriveButton  = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 1));
-    private final Button _gunnerVisionButton = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 2));
-    
     
     // auto test buttons //
     private final Button _autoTestButton0  = new JoystickButton(_rStick, 7);
@@ -60,16 +42,26 @@ public class OI {
     private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
     
 	private final Button _agitatorButton = new JoystickButton(_rStick, 3);
-	private final Button _intakeButton   = new JoystickButton(_rStick, 4);
 	
-	// TODO - Assign buttons //
+	// TODO - Assign buttons for winch //
 	//private final Button _retractWinchButton = new JoystickButton();
 	//private final Button _operateWinchButton = new JoystickButton();
+	
+	// TODO - Assign buttons for shooter //
+	//private final Button _shooterButton 		= new JoystickButton();
+	//private final Button _shooterToggleButton = new JoystickButton();
     
     public OI() {
         _intakeButton.toggleWhenPressed(new IntakeBalls());
+        _outtakeButton.toggleWhenPressed(new OuttakeBalls());
 
         _agitatorButton.toggleWhenPressed(new ActivateAgitator());
+        
+        //_retractWinchButton.whenPressed(new RetractWinch());
+        //_operateWinchButton.whenPressed(new OperateWinch());
+        
+        //_shooterButton.whenPressed(new ShootBall());
+        //_shooterToggleButton.toggleWhenPressed(new ShootBall());
     }
     
     public Joystick getLeftStick()  {
@@ -90,14 +82,6 @@ public class OI {
     
     public boolean getGunnerControlEnabled() {
     	return _gunnerModeState.get();
-    }
-    
-    public boolean getIntakeOperateButton() {
-    	return _intakeOperateButton.get();
-    }
-    
-    public boolean getWinchButton(){
-    	return _activateWinchButton.get();
     }
     
     public void setGunnerControlEnabled(boolean enabled) {

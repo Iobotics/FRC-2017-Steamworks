@@ -2,10 +2,7 @@ package org.usfirst.frc.team2438.robot.commands;
 
 
 import org.usfirst.frc.team2438.robot.OI;
-import org.usfirst.frc.team2438.robot.subsystems.Agitator;
-import org.usfirst.frc.team2438.robot.subsystems.DriveTrain;
-import org.usfirst.frc.team2438.robot.subsystems.Intake;
-import org.usfirst.frc.team2438.robot.subsystems.Winch;
+import org.usfirst.frc.team2438.robot.subsystems.*;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,7 +21,7 @@ public abstract class CommandBase extends Command {
     public static final Agitator         agitator      = new Agitator();
     //public static final Camera         camera        = new Camera();
     public static final Winch            winch         = new Winch();
-    //public static final Shooter        shooter       = new Shooter();
+    public static final Shooter          shooter       = new Shooter();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -39,7 +36,7 @@ public abstract class CommandBase extends Command {
         intake.init();
         winch.init();
         agitator.init();
-        //shooter.init();
+        shooter.init();
         //camera.init();
         //distance.init();
     }

@@ -24,6 +24,8 @@ public class RobotMap {
     
     // shooter //
     
+    public static final int shooterTalon = 7; //TODO - Change ID
+    
     // camera & distance //
 	
 	// winch //
