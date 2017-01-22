@@ -7,7 +7,7 @@ import com.ctre.CANTalon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * Intake
  */
 public class Intake extends Subsystem {
 	
@@ -18,9 +18,7 @@ public class Intake extends Subsystem {
 		_intake.setInverted(true);
 	}
 
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-    }
+    public void initDefaultCommand() { }
     
     public void setPower(double power) {
     	_intake.set(power);

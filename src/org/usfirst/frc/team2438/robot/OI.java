@@ -3,7 +3,6 @@ package org.usfirst.frc.team2438.robot;
 import org.usfirst.frc.team2438.robot.commands.*;
 
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.AxisType;
 import edu.wpi.first.wpilibj.buttons.Button;
 //import edu.wpi.first.wpilibj.buttons.InternalButton;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -22,10 +21,10 @@ public class OI {
 	// joysticks //
     private final Joystick _lStick = new Joystick(1);
     private final Joystick _rStick = new Joystick(2);
-    //private final Joystick _xStick = new Joystick(3);
+    /*private final Joystick _xStick = new Joystick(3);
     
     // driver buttons //
-    /*private final Button _intakeButton = new JoystickButton(_rStick, 1);
+    private final Button _intakeButton = new JoystickButton(_rStick, 1);
     private final Button _outakeButton = new JoystickButton(_lStick, 1);
     
     private final Button _ballOperateButton   = new JoystickButton(_lStick, 2);
@@ -62,10 +61,13 @@ public class OI {
     private final Button _autoTestButton4  = new JoystickButton(_rStick, 11);
     private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
     
-    private final Button _intakeButton   = new JoystickButton(_rStick, 3);
+	private final Button _agitatorButton = new JoystickButton(_rStick, 3);
+	private final Button _intakeButton   = new JoystickButton(_rStick, 4);
     
     public OI() {
         _intakeButton.toggleWhenPressed(new IntakeBalls());
+
+        _agitatorButton.toggleWhenPressed(new ActivateAgitator());
     }
     
     public Joystick getLeftStick()  {

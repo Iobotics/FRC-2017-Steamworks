@@ -28,4 +28,7 @@ public class RobotMap {
 	// winch //
 	
 	// gear system //
+    
+    // hopper //
+    public static final int agitatorTalon = 7; // TODO - Change ID
 }

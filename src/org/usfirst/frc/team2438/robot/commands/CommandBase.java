@@ -2,6 +2,7 @@ package org.usfirst.frc.team2438.robot.commands;
 
 
 import org.usfirst.frc.team2438.robot.OI;
+import org.usfirst.frc.team2438.robot.subsystems.Agitator;
 import org.usfirst.frc.team2438.robot.subsystems.DriveTrain;
 import org.usfirst.frc.team2438.robot.subsystems.Intake;
 
@@ -19,7 +20,7 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static final DriveTrain       drivetrain    = new DriveTrain();
     public static final Intake           intake        = new Intake();
-    //public static final Agitator         agitator      = new Agitator();
+    public static final Agitator         agitator      = new Agitator();
     //public static final Camera           camera        = new Camera();
     //public static final Winch            winch         = new Winch();
     //public static final Shooter          shooter       = new Shooter();
@@ -36,7 +37,7 @@ public abstract class CommandBase extends Command {
         drivetrain.init();
         intake.init();
         //winch.init();
-        //agitator.init();
+        agitator.init();
         //shooter.init();
         //camera.init();
         //distance.init();
