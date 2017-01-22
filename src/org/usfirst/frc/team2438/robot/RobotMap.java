@@ -16,7 +16,10 @@ public class RobotMap {
     public static final int driveRightSlave1   = 5;
     public static final int driveRightSlave2   = 4;
     
+    // Agitator //
+    
     // intake //
+    public static final int intake = 13;
     
     // shooter //
     

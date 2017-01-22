@@ -1,6 +1,6 @@
-package org.usfirst.frc.team2438.commands;
+package org.usfirst.frc.team2438.robot.commands;
 
-import org.usfirst.frc.team2438.util.PowerScaler;
+import org.usfirst.frc.team2438.robot.util.PowerScaler;
 
 /**
  *

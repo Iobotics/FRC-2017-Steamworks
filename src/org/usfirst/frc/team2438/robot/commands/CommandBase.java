@@ -1,17 +1,11 @@
-package org.usfirst.frc.team2438.commands;
+package org.usfirst.frc.team2438.robot.commands;
 
-
-import edu.wpi.first.wpilibj.command.Command;
 
 import org.usfirst.frc.team2438.robot.OI;
-import org.usfirst.frc.team2438.subsystems.Camera;
-import org.usfirst.frc.team2438.subsystems.Agitator;
-import org.usfirst.frc.team2438.subsystems.DriveTrain;
-import org.usfirst.frc.team2438.subsystems.Intake;
-import org.usfirst.frc.team2438.subsystems.Winch;
-import org.usfirst.frc.team2438.subsystems.Shooter;
-//import org.usfirst.frc.team2438.subsystems.Elevator;
-//import org.usfirst.frc.team2438.subsystems.NavigationSensor;
+import org.usfirst.frc.team2438.robot.subsystems.DriveTrain;
+import org.usfirst.frc.team2438.robot.subsystems.Intake;
+
+import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * The base for all commands. All atomic commands should subclass CommandBase.
@@ -25,10 +19,10 @@ public abstract class CommandBase extends Command {
     // Create a single static instance of all of your subsystems
     public static final DriveTrain       drivetrain    = new DriveTrain();
     public static final Intake           intake        = new Intake();
-    public static final Agitator         agitator      = new Agitator();
-    public static final Camera           camera        = new Camera();
-    public static final Winch            winch         = new Winch();
-    public static final Shooter          shooter       = new Shooter();
+    //public static final Agitator         agitator      = new Agitator();
+    //public static final Camera           camera        = new Camera();
+    //public static final Winch            winch         = new Winch();
+    //public static final Shooter          shooter       = new Shooter();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -41,10 +35,10 @@ public abstract class CommandBase extends Command {
         // Show what command your subsystem is running on the SmartDashboard
         drivetrain.init();
         intake.init();
-        winch.init();
-        agitator.init();
-        shooter.init();
-        camera.init();
+        //winch.init();
+        //agitator.init();
+        //shooter.init();
+        //camera.init();
         //distance.init();
     }
 

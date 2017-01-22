@@ -1,35 +1,31 @@
 package org.usfirst.frc.team2438.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.buttons.Button;
-import edu.wpi.first.wpilibj.buttons.InternalButton;
-import edu.wpi.first.wpilibj.buttons.JoystickButton;
+import org.usfirst.frc.team2438.robot.commands.*;
 
-import org.usfirst.frc.team2438.util.ConditionalButton;
-import org.usfirst.frc.team2438.util.JoystickAxisThresholdButton;
-//import org.iolani.frc.util.PowerScaler;
-import org.usfirst.frc.team2438.commands.*;
-import org.usfirst.frc.team2438.commands.auto.*;
-//import org.iolani.frc.commands.debug.*;
+import edu.wpi.first.wpilibj.Joystick;
+import edu.wpi.first.wpilibj.Joystick.AxisType;
+import edu.wpi.first.wpilibj.buttons.Button;
+//import edu.wpi.first.wpilibj.buttons.InternalButton;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 
 /**
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	private static final int XSTICK_LTRIGGER_AXIS = 2;
-	private static final int XSTICK_RTRIGGER_AXIS = 3;
+	//private static final int XSTICK_LTRIGGER_AXIS = 2;
+	//private static final int XSTICK_RTRIGGER_AXIS = 3;
 
 	// persistent virtual button used to store gunner mode state //
-	private final InternalButton _gunnerModeState = new InternalButton();
+	//private final InternalButton _gunnerModeState = new InternalButton();
 	
 	// joysticks //
     private final Joystick _lStick = new Joystick(1);
     private final Joystick _rStick = new Joystick(2);
-    private final Joystick _xStick = new Joystick(3);
+    //private final Joystick _xStick = new Joystick(3);
     
     // driver buttons //
-    private final Button _intakeButton = new JoystickButton(_rStick, 1);
+    /*private final Button _intakeButton = new JoystickButton(_rStick, 1);
     private final Button _outakeButton = new JoystickButton(_lStick, 1);
     
     private final Button _ballOperateButton   = new JoystickButton(_lStick, 2);
@@ -64,11 +60,12 @@ public class OI {
     private final Button _autoTestButton2  = new JoystickButton(_rStick, 9);
     private final Button _autoTestButton3  = new JoystickButton(_rStick, 10);
     private final Button _autoTestButton4  = new JoystickButton(_rStick, 11);
-    private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);
+    private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
+    
+    private final Button _intakeButton   = new JoystickButton(_rStick, 3);
     
     public OI() {
-        
-       
+        _intakeButton.toggleWhenPressed(new IntakeBalls());
     }
     
     public Joystick getLeftStick()  {
@@ -79,7 +76,7 @@ public class OI {
         return _rStick;
     }
     
-    public Button getBallOperateButton() {
+    /*public Button getBallOperateButton() {
     	return _ballOperateButton;
     }
     
@@ -101,5 +98,5 @@ public class OI {
     
     public Joystick getGunnerStick() {
     	return _xStick;
-    }
+    }*/
 }

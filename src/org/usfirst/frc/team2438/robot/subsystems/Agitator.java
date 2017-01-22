@@ -1,8 +1,8 @@
-package org.usfirst.frc.team2438.subsystems;
+package org.usfirst.frc.team2438.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Intake extends Subsystem{
+public class Agitator extends Subsystem{
 
 	public void init(){
 		

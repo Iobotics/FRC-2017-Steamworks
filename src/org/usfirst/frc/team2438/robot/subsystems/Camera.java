@@ -1,9 +1,8 @@
-package org.usfirst.frc.team2438.subsystems;
+package org.usfirst.frc.team2438.robot.subsystems;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 
-public class Winch extends Subsystem{
-
+public class Camera extends Subsystem{
 	public void init(){
 		
 	}

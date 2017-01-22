@@ -3,16 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.usfirst.frc.team2438.subsystems;
+package org.usfirst.frc.team2438.robot.subsystems;
+
+import org.usfirst.frc.team2438.robot.RobotMap;
+import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
+import org.usfirst.frc.team2438.robot.util.Utility;
 
 import com.ctre.CANTalon;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
-import org.usfirst.frc.team2438.robot.RobotMap;
-import org.usfirst.frc.team2438.commands.OperateArcadeDrive;
-import org.usfirst.frc.team2438.util.Utility;
 
 import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
@@ -71,8 +71,8 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //this.setDefaultCommand(new OperateTankDrive());
-        this.setDefaultCommand(new OperateArcadeDrive());
+        this.setDefaultCommand(new OperateTankDrive());
+        //this.setDefaultCommand(new OperateArcadeDrive());
     }
 
     /**
@@ -111,8 +111,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("drive-right-tank", right);
     	SmartDashboard.putNumber("drive-left-tank", left);
     	
-    	_left.set(left);
-    	_right.set(right);
+    	_left.set(left * 0.7);
+    	_right.set(right * 0.7);
     }
     
     /**

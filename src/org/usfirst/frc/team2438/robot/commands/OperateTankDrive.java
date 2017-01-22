@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.usfirst.frc.team2438.commands;
+package org.usfirst.frc.team2438.robot.commands;
 
 /**
  *
@@ -27,8 +27,8 @@ public class OperateTankDrive extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	double left  = oi.getLeftStick().getY();
-    	double right = oi.getRightStick().getY();
+    	double left  = -oi.getLeftStick().getY();
+    	double right = -oi.getRightStick().getY();
         
         
         //System.out.println("joysticks: " + mag + ", " + rot);
