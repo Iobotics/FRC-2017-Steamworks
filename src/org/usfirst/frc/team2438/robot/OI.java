@@ -34,9 +34,7 @@ public class OI {
     private final Button _homePositionButton  = new JoystickButton(_rStick, 3);
     private final Button _loadPositionButton  = new JoystickButton(_lStick, 3);
     
-    private final Button _gunnerLowButton  = new JoystickButton(_rStick, 4);
-    private final Button _gunnerMidButton  = new JoystickButton(_rStick, 2);
-    private final Button _gunnerHighButton = new JoystickButton(_rStick, 5);
+    private final Button _activateWinchButton = new JoystickButton(_rStick, 2);
     
     // gunner buttons //
     private final Button _gunnerFastButton = new ConditionalButton(_gunnerModeState, new JoystickButton(_xStick, 3));
@@ -63,6 +61,10 @@ public class OI {
     
 	private final Button _agitatorButton = new JoystickButton(_rStick, 3);
 	private final Button _intakeButton   = new JoystickButton(_rStick, 4);
+	
+	// TODO - Assign buttons //
+	//private final Button _retractWinchButton = new JoystickButton();
+	//private final Button _operateWinchButton = new JoystickButton();
     
     public OI() {
         _intakeButton.toggleWhenPressed(new IntakeBalls());
@@ -81,10 +83,6 @@ public class OI {
     /*public Button getBallOperateButton() {
     	return _ballOperateButton;
     }
-    
-    public Button getIntakeOperateButton() {
-    	return _intakeOperateButton;
-    }
 
     public Button getAuxOperateButton() {
     	return _auxOperateButton;
@@ -92,6 +90,14 @@ public class OI {
     
     public boolean getGunnerControlEnabled() {
     	return _gunnerModeState.get();
+    }
+    
+    public boolean getIntakeOperateButton() {
+    	return _intakeOperateButton.get();
+    }
+    
+    public boolean getWinchButton(){
+    	return _activateWinchButton.get();
     }
     
     public void setGunnerControlEnabled(boolean enabled) {
