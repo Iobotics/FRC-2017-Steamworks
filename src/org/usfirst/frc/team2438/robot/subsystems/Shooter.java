@@ -33,7 +33,7 @@ public class Shooter extends Subsystem {
 		_shooter.configPeakOutputVoltage(+12.0f, -12.0f);
 		_shooter.setProfile(1);
     	_shooter.setF(0.03);
-    	_shooter.setP(0.1);
+    	_shooter.setP(0.18);
     	_shooter.setI(0);
     	_shooter.setD(0);
     	
@@ -43,7 +43,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() { }
     
     public void runShooter() {
-    	_shooter.set(3200.0); //TODO - Change shooter power
+    	_shooter.set(3100.0); //TODO - Change shooter power
     }
     
     public void stopShooter() {
