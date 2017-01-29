@@ -20,21 +20,21 @@ public class RobotMap {
     
     // intake //
     
-    public static final int intake = 13;
+    public static final int intake = 13; //TODO - Change ID
     
     // shooter //
     
-    public static final int shooterTalon = 7; //TODO - Change ID
+    public static final int shooterTalon = 9; //TODO - Change ID (previous 13)
     
     // camera & distance //
 	
 	// winch //
     
-	public static final int winchTalon = 7; //TODO - Change ID
+	public static final int winchTalon = 13; //TODO - Change ID
 	
 	// gear system //
     
     // hopper //
 	
-    public static final int agitatorTalon = 7; // TODO - Change ID
+    public static final int agitatorTalon = 13; // TODO - Change ID
 }

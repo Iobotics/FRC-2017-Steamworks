@@ -42,7 +42,7 @@ public class Robot2017 extends IterativeRobot {
 		
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("My Auto", customAuto);
-		SmartDashboard.putData("Auto choices", chooser);
+		//SmartDashboard.putData("Auto choices", chooser);
 	}
 	
 	/**
@@ -79,6 +79,11 @@ public class Robot2017 extends IterativeRobot {
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
 	}
+	
+	@Override
+	public void teleopInit() {
+		CommandBase.shooter.resetShooter();
+	}
 
 	/**
 	 * This function is called periodically during operator control
@@ -86,6 +91,7 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		CommandBase.shooter.debug();
 	}
 
 	/**

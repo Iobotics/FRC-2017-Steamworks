@@ -23,8 +23,8 @@ public class OI {
     private final Joystick _rStick = new Joystick(2);
     
     // driver buttons //
-    private final Button _intakeButton = new JoystickButton(_rStick, 4);
-    private final Button _outtakeButton = new JoystickButton(_rStick, 5);
+    //private final Button _intakeButton = new JoystickButton(_rStick, 4);
+    //private final Button _outtakeButton = new JoystickButton(_rStick, 5);
     
     /*private final Button _ballOperateButton   = new JoystickButton(_lStick, 2);
     private final Button _intakeOperateButton = new JoystickButton(_lStick, 5);
@@ -41,27 +41,27 @@ public class OI {
     private final Button _autoTestButton4  = new JoystickButton(_rStick, 11);
     private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
     
-	private final Button _agitatorButton = new JoystickButton(_rStick, 3);
+	//private final Button _agitatorButton = new JoystickButton(_rStick, 3);
 	
 	// TODO - Assign buttons for winch //
 	//private final Button _retractWinchButton = new JoystickButton();
 	//private final Button _operateWinchButton = new JoystickButton();
 	
 	// TODO - Assign buttons for shooter //
-	//private final Button _shooterButton 		= new JoystickButton();
-	//private final Button _shooterToggleButton = new JoystickButton();
+	private final Button _shooterButton 	  = new JoystickButton(_rStick, 4);
+	private final Button _shooterToggleButton = new JoystickButton(_rStick, 5);
     
     public OI() {
-        _intakeButton.toggleWhenPressed(new IntakeBalls());
-        _outtakeButton.toggleWhenPressed(new OuttakeBalls());
+        //_intakeButton.toggleWhenPressed(new IntakeBalls());
+        //_outtakeButton.toggleWhenPressed(new OuttakeBalls());
 
-        _agitatorButton.toggleWhenPressed(new ActivateAgitator());
+        //_agitatorButton.toggleWhenPressed(new ActivateAgitator());
         
         //_retractWinchButton.whenPressed(new RetractWinch());
         //_operateWinchButton.whenPressed(new OperateWinch());
         
-        //_shooterButton.whenPressed(new ShootBall());
-        //_shooterToggleButton.toggleWhenPressed(new ShootBall());
+        _shooterButton.whenPressed(new ShootBall());
+        _shooterToggleButton.toggleWhenPressed(new ShootBall());
     }
     
     public Joystick getLeftStick()  {

@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2438.robot.commands;
 
 /**
- *
+ * Shoots balls
  */
 public class ShootBall extends CommandBase {
 
