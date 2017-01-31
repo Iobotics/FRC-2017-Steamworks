@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2438.robot;
 
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
+import org.usfirst.frc.team2438.robot.subsystems.Shooter;
 
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
@@ -8,7 +9,6 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -37,6 +37,7 @@ public class Robot2017 extends IterativeRobot {
     	_pdp.clearStickyFaults();
     	
     	_prefs = Preferences.getInstance();
+    	this.displayPreferences();
         
     	CommandBase.init();
 		
@@ -50,7 +51,7 @@ public class Robot2017 extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit() {
-    	SmartDashboard.putData(Scheduler.getInstance());
+    	//SmartDashboard.putData(Scheduler.getInstance());
     }
     
 	public void disabledPeriodic() {
@@ -83,6 +84,7 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopInit() {
 		CommandBase.shooter.resetShooter();
+		this.setPreferences();
 	}
 
 	/**
@@ -100,6 +102,28 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	/**
+	 * Display robot preferences
+	 */
+	public void displayPreferences() {
+		_prefs.putDouble("Shooter power", Shooter.getShooterPower());
+		_prefs.putDouble("F", Shooter.getF());
+		_prefs.putDouble("P", Shooter.getP());
+		_prefs.putDouble("I", Shooter.getI());
+		_prefs.putDouble("D", Shooter.getD());
+	}
+	
+	/**
+	 * Set robot preferences
+	 */
+	public void setPreferences() {
+		Shooter.setShooterPower(_prefs.getDouble("Shooter power", Shooter.getShooterPower()));
+		Shooter.setF(_prefs.getDouble("kF", Shooter.getF()));
+		Shooter.setP(_prefs.getDouble("kP", Shooter.getP()));
+		Shooter.setI(_prefs.getDouble("kI", Shooter.getI()));
+		Shooter.setD(_prefs.getDouble("kD", Shooter.getD()));
 	}
 }
 

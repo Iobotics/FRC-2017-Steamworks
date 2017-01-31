@@ -16,6 +16,13 @@ public class Shooter extends Subsystem {
 
 	private CANTalon _shooter;
 	
+	private static double shooterPower = 3100.0;
+	
+	private static double kF = 0.03;
+	private static double kP = 0.18;
+	private static double kI = 0.0;
+	private static double kD = 0.0;
+	
 	private static final int ENCODER_TICKS_PER_REV = 1024;
 	
 	public void init(){
@@ -32,10 +39,10 @@ public class Shooter extends Subsystem {
 		_shooter.configNominalOutputVoltage(+0.0f, -0.0f);
 		_shooter.configPeakOutputVoltage(+12.0f, -12.0f);
 		_shooter.setProfile(1);
-    	_shooter.setF(0.03);
-    	_shooter.setP(0.18);
-    	_shooter.setI(0);
-    	_shooter.setD(0);
+    	_shooter.setF(kF);
+    	_shooter.setP(kP);
+    	_shooter.setI(kI);
+    	_shooter.setD(kD);
     	
     	_shooter.changeControlMode(TalonControlMode.Speed);
 	}
@@ -43,7 +50,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() { }
     
     public void runShooter() {
-    	_shooter.set(3100.0); //TODO - Change shooter power
+    	_shooter.set(Shooter.shooterPower); //TODO - Change shooter power
     }
     
     public void stopShooter() {
@@ -53,6 +60,46 @@ public class Shooter extends Subsystem {
     public void resetShooter() {
     	_shooter.setPosition(0.0);
     }
+    
+    public static void setShooterPower(double shooterPower) {
+    	Shooter.shooterPower = shooterPower;
+    }
+    
+    public static double getShooterPower() {
+    	return Shooter.shooterPower;
+    }
+    
+    public static void setF(double kF) {
+    	Shooter.kF = kF;
+    }
+    
+    public static void setP(double kP) {
+    	Shooter.kP = kP;
+    }
+    
+    public static void setI(double kI) {
+    	Shooter.kI = kI;
+    }
+
+	public static void setD(double kD) {
+		Shooter.kD = kD;
+	}
+	
+	public static double getF() {
+		return Shooter.kF;
+	}
+	
+	public static double getP() {
+		return Shooter.kP;
+	}
+	
+	public static double getI() {
+		return Shooter.kI;
+	}
+	
+	public static double getD() {
+		return Shooter.kD;
+	}
     
     public void debug() {
     	SmartDashboard.putNumber("Ticks", _shooter.getEncPosition());
