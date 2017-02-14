@@ -11,5 +11,5 @@ dist
 hs_err_pid*
 
 # Libraries #
-!CTRLib.jar
-!navx_frc.jar
+!lib/*.jar
+!Vision2017/code/*.jar
