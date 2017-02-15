@@ -53,8 +53,8 @@ float imageCenterY = 0.5;
 PImage rawImage;
 
 // Camera parameters //
-int cameraWidth = 400;
-int cameraHeight = 300;
+int cameraWidth = 800;
+int cameraHeight = 600;
 String cameraName = "name=Logitech HD Pro Webcam C920,size=800x600,fps=30";
 float cameraFocalLength = 0.1444882; //Inches
 float cameraSensorWidth = 0.188976; //Inches
@@ -101,19 +101,6 @@ void setup() {
   //camera = new IPCapture(this, mjpegURL, "", ""); //No username / password
   //camera.start();
   rawImage = loadImage("image2.jpg");
-  frame = rawImage;
-  PImage filteredFrame = filterImageHSBRange(frame, targetHueMin, targetHueMax, targetSatMin, targetSatMax, targetValMin, targetValMax);
-  filteredFrame.loadPixels();
-  filteredFrame.updatePixels();
-  boolean exit = false;
-  for(int y = 150; y < 450 && !exit; y++) {
-    for(int x = 200; x < 600 && !exit; x++) {
-      if(filteredFrame.get(x, y) == 1) {
-        exit = true;
-        System.out.println("Found");
-      }
-    }
-  }
   
   // Initialize blob detector //
   blobDetector = new BlobDetection(cameraWidth, cameraHeight);
@@ -166,7 +153,7 @@ void draw() {
     ) {
       filteredBlobs.add(blob);
       //println("Distance: " + getTargetDistance(blob));
-      println("Aspect ratio: " + getBlobAspectRatio(blob) + " " + getBlobRectangularity(blob));
+      //println("Aspect ratio: " + getBlobAspectRatio(blob) + " " + getBlobRectangularity(blob));
       //println("Area: " + getBlobArea(blob));
       //println("X error: " + getTargetXError(blob));
       //println("Y error: " + getTargetYError(blob));
@@ -174,24 +161,24 @@ void draw() {
   }
   strokeWeight(1);
   
+  // Display image //
+  image(frame, 0, 0, 800, 600);
+  //image(filteredFrame, 0, 0, 800, 600);
+  
   // Show bounding boxes and target locations //
   for (Blob blob : filteredBlobs) {
     stroke(240.0, 100.0, 100.0); //Blue stroke
     noFill();
-    rect(denormalize(blob.x, frame.width)*2, denormalize(blob.y, frame.height)*2, denormalize(blob.w, frame.width)*2, denormalize(blob.h, frame.height)*2);
+    rect(denormalize(blob.x, frame.width), denormalize(blob.y, frame.height), denormalize(blob.w, frame.width), denormalize(blob.h, frame.height));
     stroke(200.0, 100.0, 100.0); //Blue stroke
     fill(200.0, 100.0, 100.0); //Blue fill
-    ellipse(denormalize(blob.x, frame.width)*2, denormalize(blob.y, frame.height)*2, 4, 4);
+    ellipse(denormalize(blob.x, frame.width), denormalize(blob.y, frame.height), 4, 4);
     stroke(0.0, 100.0, 100.0); //Red stroke
     noFill();
   }
   
   float leastError = -1; //Least error seen so far
   float error;
-  
-  // Display image //
-  //image(frame, 0, 0, 800, 600);
-  image(filteredFrame, 0, 0, 800, 600);
   
   // Find bar height with OpenCV //
   // Find largest estimated polygon
@@ -391,7 +378,7 @@ PImage filterImageHSBRange(PImage img, float minHue, float maxHue, float minSat,
     }
     /*if(i == mousePixel) {
       println("mouse HSB", hue, sat, val, mouseX, mouseY);
-    }/*
+    }*/
   }
   
   output.updatePixels();
