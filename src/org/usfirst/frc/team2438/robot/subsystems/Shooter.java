@@ -18,8 +18,8 @@ public class Shooter extends Subsystem {
 	
 	private static double shooterPower = 3100.0;
 	
-	private static double kF = 0.03;
-	private static double kP = 0.18;
+	private static double kF = 0.045;
+	private static double kP = 0.033;
 	private static double kI = 0.0;
 	private static double kD = 0.0;
 	
@@ -32,7 +32,7 @@ public class Shooter extends Subsystem {
 		_shooter.configEncoderCodesPerRev(ENCODER_TICKS_PER_REV);
 		
 		//_shooter.reverseSensor(true);
-		_shooter.setInverted(true);
+		_shooter.setInverted(false);
 		
 		_shooter.setPosition(0.0);
 		
@@ -104,6 +104,7 @@ public class Shooter extends Subsystem {
     public void debug() {
     	SmartDashboard.putNumber("Ticks", _shooter.getEncPosition());
     	SmartDashboard.putNumber("Power", _shooter.getSpeed());
+    	SmartDashboard.putNumber("Shooter Current", _shooter.getOutputCurrent());
     }
 }
 

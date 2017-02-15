@@ -94,6 +94,7 @@ public class Robot2017 extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		CommandBase.shooter.debug();
+		//CommandBase.agitator.debug();
 	}
 
 	/**

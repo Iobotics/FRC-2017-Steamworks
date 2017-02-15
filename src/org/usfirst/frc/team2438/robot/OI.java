@@ -2,6 +2,7 @@ package org.usfirst.frc.team2438.robot;
 
 import org.usfirst.frc.team2438.robot.commands.*;
 
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.Button;
 //import edu.wpi.first.wpilibj.buttons.InternalButton;
@@ -21,6 +22,7 @@ public class OI {
 	// joysticks //
     private final Joystick _lStick = new Joystick(1);
     private final Joystick _rStick = new Joystick(2);
+    private final Joystick _xStick = new Joystick(3);
     
     // driver buttons //
     //private final Button _intakeButton = new JoystickButton(_rStick, 4);
@@ -49,7 +51,7 @@ public class OI {
 	
 	// TODO - Assign buttons for shooter //
 	private final Button _shooterButton 	  = new JoystickButton(_rStick, 4);
-	private final Button _shooterToggleButton = new JoystickButton(_rStick, 5);
+	private final Button _shooterToggleButton = new JoystickButton(_xStick, 3);
     
     public OI() {
         //_intakeButton.toggleWhenPressed(new IntakeBalls());
@@ -70,6 +72,10 @@ public class OI {
     
     public Joystick getRightStick() {
         return _rStick;
+    }
+    
+    public Joystick getXStick() {
+    	return _xStick;
     }
     
     /*public Button getBallOperateButton() {
