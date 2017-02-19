@@ -1,7 +1,7 @@
 // ****NOTE**** //
 // Requires installing (through Processing)
-// three libraries: OpenCV, Video, and BlobDetection
-// in addition to NetworkTables (from wpilib)
+// four libraries: OpenCV, Video, IPCapture,
+// and BlobDetection in addition to NetworkTables
 
 import gab.opencv.*;
 
@@ -30,14 +30,14 @@ float targetSatMax = 120.0;
 float targetValMin = 20.0;
 float targetValMax = 100.0;
 float targetBoundingBoxAreaMin = 0.0001;
-float targetAreaMin = 0.001;
+float targetAreaMin = 0.0005;//0.001;
 //Aspect ratio: Width / height... ideal = 1.6
 float targetAspectRatioMin = 0.25;  
 float targetAspectRatioMax = 3.0;
 float targetAspectRatioIdeal = 1.6;
 //Rectangularity: Area / bounding box area... ideal = 0.3
 float targetRectangularityMin = 0.0;
-float targetRectangularityMax = 5.0;
+float targetRectangularityMax = 2.5;//5.0;
 
 float imageCenterX = 0.5; //What should the program consider the "center" of the screen (as a proportion of its width and height)?
 float imageCenterY = 0.5;
@@ -59,6 +59,7 @@ String cameraName = "name=Logitech HD Pro Webcam C920,size=800x600,fps=30";
 float cameraFocalLength = 0.1444882; //Inches
 float cameraSensorWidth = 0.188976; //Inches
 float cameraSensorHeight = 0.141732;
+float cameraFOV = (float)(34.25 / 180 * Math.PI); // Radians
 
 // Distance calibration constants //
 float calibrationDistance = 122; //Inches
@@ -162,8 +163,10 @@ void draw() {
   strokeWeight(1);
   
   // Display image //
-  image(frame, 0, 0, 800, 600);
-  //image(filteredFrame, 0, 0, 800, 600);
+  //image(frame, 0, 0, 800, 600);
+  image(filteredFrame, 0, 0, 800, 600);
+  
+  float blobWidth = 0;
   
   // Show bounding boxes and target locations //
   for (Blob blob : filteredBlobs) {
@@ -175,6 +178,7 @@ void draw() {
     ellipse(denormalize(blob.x, frame.width), denormalize(blob.y, frame.height), 4, 4);
     stroke(0.0, 100.0, 100.0); //Red stroke
     noFill();
+    blobWidth = blob.w;
   }
   
   float leastError = -1; //Least error seen so far
@@ -205,43 +209,65 @@ void draw() {
   }
   
   float barLength = -1.0; //Used for distance calculation; if height = -1, then bar height calc failed
+  float polygonWidth = 0.0;
   
   if (largestPolygon != null) {
     ArrayList<PVector> polygonPoints = largestPolygon.getPoints();
     ArrayList<PVector> upperLeftCandidates = new ArrayList<PVector>();
-    ArrayList<PVector> lowerLeftCandidates = new ArrayList<PVector>();
+    //ArrayList<PVector> lowerLeftCandidates = new ArrayList<PVector>();
+    ArrayList<PVector> upperRightCandidates = new ArrayList<PVector>();
     
     // Find upper left and bottom left corners //
     PVector upperLeft = null;
-    PVector bottomLeft = null;
+    //PVector bottomLeft = null;
+    PVector upperRight = null;
     
     for (PVector point : polygonPoints) {
-      if (point.y < largestPolygon.getBoundingBox().getLocation().y + (largestPolygon.getBoundingBox().getHeight() / 2)) { //This point is in the upper half of the rectangle
+      if (point.y < largestPolygon.getBoundingBox().getLocation().y + (largestPolygon.getBoundingBox().getHeight() / 2) && point.x < largestPolygon.getBoundingBox().getLocation().x + (largestPolygon.getBoundingBox().getWidth() / 2)) { //This point is in the left side of the rectangle
         upperLeftCandidates.add(point);
-      } else if (point.y > largestPolygon.getBoundingBox().getLocation().y - (largestPolygon.getBoundingBox().getHeight() / 2)) { //This point is in the lower half of the rectangle
+      } /*else if (point.y > largestPolygon.getBoundingBox().getLocation().y - (largestPolygon.getBoundingBox().getHeight() / 2)) { //This point is in the lower half of the rectangle
         lowerLeftCandidates.add(point);
+      }*/
+      else if (point.y < largestPolygon.getBoundingBox().getLocation().y + (largestPolygon.getBoundingBox().getHeight() / 2) && point.x > largestPolygon.getBoundingBox().getLocation().x + (largestPolygon.getBoundingBox().getWidth() / 2) + 100) { //This point is in the right side of the rectangle
+        //System.out.println(point.x + " " + point.y);
+        //System.out.println(largestPolygon.getBoundingBox().getLocation().x + (largestPolygon.getBoundingBox().getWidth() / 2));
+        upperRightCandidates.add(point);
       }
+      //ellipse(point.x, point.y, 4, 4);
     }
     
-    for (PVector point : upperLeftCandidates) { //Locate leftmost candidate
+    for (PVector point : upperLeftCandidates) { //Locate upper leftmost candidate
       if (upperLeft == null || upperLeft.x > point.x) upperLeft = point;
     }
     
-    for (PVector point : lowerLeftCandidates) { //Locate leftmost candidate
+    /*for (PVector point : lowerLeftCandidates) { //Locate lower leftmost candidate
       if (bottomLeft == null || bottomLeft.x > point.x) bottomLeft = point;
+    }*/
+    
+    for (PVector point : upperRightCandidates) { //Locate upper rightmost candidate
+      if (upperRight == null || upperRight.x < point.x) upperRight = point;
     }
     
-    if (upperLeft != null && bottomLeft != null) {
+    /*if (upperLeft != null && bottomLeft != null) {
       ellipseMode(CENTER);
-      ellipse(upperLeft.x * 2, upperLeft.y * 4, 4, 4);
-      ellipse(bottomLeft.x * 2, bottomLeft.y * 4, 4, 4);
+      ellipse(upperLeft.x, upperLeft.y, 4, 4);
+      ellipse(bottomLeft.x, bottomLeft.y, 4, 4);
       
       // Find bar height //
       barLength = dist(upperLeft.x, upperLeft.y, bottomLeft.x, bottomLeft.y);
+    }*/
+    
+    if(upperLeft != null && upperRight != null) {
+      ellipseMode(CENTER);
+      ellipse(upperLeft.x, upperLeft.y, 4, 4);
+      ellipse(upperRight.x, upperRight.y, 4, 4);
+      polygonWidth = dist(upperLeft.x, upperLeft.y, upperRight.x, upperRight.y);
     }
   }
   
-  float estimatedDistance = getDistance(barLength);
+  //float estimatedDistance = getDistance(barLength);
+  float estimatedDistance = ((targetWidth/12)*width)/(2*polygonWidth*tan(cameraFOV));
+  //System.out.println(polygonWidth);
   
   //println("Bar length: " + barLength);
   //println("Estimated distance: " + estimatedDistance);
@@ -292,7 +318,8 @@ void draw() {
     noStroke();
     text("e-X: " + round(getTargetXError(closestTarget) * rounder) / rounder, 60, 30);
     text("e-Y: " + round(getTargetYError(closestTarget) * rounder) / rounder, 60, 60);
-    text("D: " + round(estimatedDistance * rounder) / rounder, 60, 90);
+    //text("D: " + round(estimatedDistance * rounder) / rounder, 60, 90);
+    text("D: " + estimatedDistance + " in", 60, 90);
     text("h-Y: " + round((cameraHeight - (closestTarget.y * cameraHeight)) * rounder) / rounder, 60, 120);
   
     // Push data to the network table //
@@ -311,8 +338,8 @@ void draw() {
     strokeWeight(1);
     if (target == closestTarget) stroke(110, 100, 100);
     else stroke(50, 100, 70);
-    line((target.x * cameraWidth) * 2, ((target.y * cameraHeight) + 50)*2, (target.x * cameraWidth)*2, ((target.y * cameraHeight) - 50)*2);
-    line(((target.x * cameraWidth) - 50)*2, (target.y * cameraHeight)*2, ((target.x * cameraWidth) + 50)*2, (target.y * cameraHeight)*2);
+    line((target.x * cameraWidth), ((target.y * cameraHeight) + 50), (target.x * cameraWidth), ((target.y * cameraHeight) - 50));
+    line(((target.x * cameraWidth) - 50), (target.y * cameraHeight), ((target.x * cameraWidth) + 50), (target.y * cameraHeight));
     
     // Detect lock for audio //
     error = sqrt(pow(getTargetXError(target), 2) + pow(getTargetYError(target), 2));
@@ -334,8 +361,8 @@ void draw() {
   
   // Camera crosshair //
   stroke(0, 100, 100);
-  line(imageCenterX * cameraWidth * 2, 0, imageCenterX * cameraWidth * 2, cameraHeight * 2);
-  line(0, imageCenterY * cameraHeight * 2 , cameraWidth * 2, imageCenterY * cameraHeight * 2);
+  line(imageCenterX * cameraWidth, 0, imageCenterX * cameraWidth, cameraHeight);
+  line(0, imageCenterY * cameraHeight, cameraWidth, imageCenterY * cameraHeight);
 }
 
 boolean filterBlobBoundingBoxAreaMin(Blob bl, float minSize) {
@@ -364,7 +391,7 @@ PImage filterImageHSBRange(PImage img, float minHue, float maxHue, float minSat,
   float sat;
   float val;
   
-  //int mousePixel = mouseY/2 * img.width + mouseX/2;
+  int mousePixel = mouseY/2 * img.width + mouseX/2;
   
   for (int i = 0; i < imgPixelCount; i++) {
     examinedPixel = img.pixels[i];
@@ -455,6 +482,6 @@ float getTriangleArea(Blob blob, BlobTriangle triangle) {
 }
 
 float getTriangleArea(float edge1, float edge2, float edge3) { //Compute the area of a triangle with Hero's formula
-  float s = (edge1 + edge2 + edge3);
+  float s = (edge1 + edge2 + edge3)/2;
   return sqrt(s * (s - edge1) * (s - edge2) * (s - edge3));
 }
