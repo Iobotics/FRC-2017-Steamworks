@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -22,7 +23,7 @@ public class Robot2017 extends IterativeRobot {
 	Preferences            _prefs;
 	
 	final String defaultAuto = "Default";
-	final String customAuto = "My Auto";
+	final String customAuto = "Auto 1";
 	String autoSelected;
 	SendableChooser<String> chooser = new SendableChooser<>();
 
@@ -37,13 +38,13 @@ public class Robot2017 extends IterativeRobot {
     	_pdp.clearStickyFaults();
     	
     	_prefs = Preferences.getInstance();
-    	this.displayPreferences();
+    	//this.displayPreferences();
         
     	CommandBase.init();
 		
 		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("My Auto", customAuto);
-		//SmartDashboard.putData("Auto choices", chooser);
+		chooser.addObject("Auto 1", customAuto);
+		SmartDashboard.putData("Auto choices", chooser);
 	}
 	
 	/**
@@ -51,7 +52,7 @@ public class Robot2017 extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit() {
-    	//SmartDashboard.putData(Scheduler.getInstance());
+    	SmartDashboard.putData(Scheduler.getInstance());
     }
     
 	public void disabledPeriodic() {
@@ -83,8 +84,8 @@ public class Robot2017 extends IterativeRobot {
 	
 	@Override
 	public void teleopInit() {
-		CommandBase.shooter.resetShooter();
-		this.setPreferences();
+		//CommandBase.shooter.resetShooter();
+		//this.setPreferences();
 	}
 
 	/**
@@ -93,8 +94,9 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		CommandBase.shooter.debug();
+		//CommandBase.shooter.debug();
 		//CommandBase.agitator.debug();
+		CommandBase.intake.debug();
 	}
 
 	/**
@@ -109,18 +111,18 @@ public class Robot2017 extends IterativeRobot {
 	 * Display robot preferences
 	 */
 	public void displayPreferences() {
-		_prefs.putDouble("Shooter power", Shooter.getShooterPower());
-		_prefs.putDouble("F", Shooter.getF());
-		_prefs.putDouble("P", Shooter.getP());
-		_prefs.putDouble("I", Shooter.getI());
-		_prefs.putDouble("D", Shooter.getD());
+		_prefs.putDouble("Shooter RPM", Shooter.getShooterRPM());
+		_prefs.putDouble("kF", Shooter.getF());
+		_prefs.putDouble("kP", Shooter.getP());
+		_prefs.putDouble("kI", Shooter.getI());
+		_prefs.putDouble("kD", Shooter.getD());
 	}
 	
 	/**
 	 * Set robot preferences
 	 */
 	public void setPreferences() {
-		Shooter.setShooterPower(_prefs.getDouble("Shooter power", Shooter.getShooterPower()));
+		Shooter.setShooterRPM(_prefs.getDouble("Shooter RPM", Shooter.getShooterRPM()));
 		Shooter.setF(_prefs.getDouble("kF", Shooter.getF()));
 		Shooter.setP(_prefs.getDouble("kP", Shooter.getP()));
 		Shooter.setI(_prefs.getDouble("kI", Shooter.getI()));

@@ -1,7 +1,5 @@
 package org.usfirst.frc.team2438.robot.commands;
 
-//import org.usfirst.frc.team2438.robot.util.Utility;
-
 /**
  * Command to intake balls
  */
@@ -14,13 +12,12 @@ public class IntakeBalls extends CommandBase {
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    }
+    protected void initialize() { }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	intake.setPower(0.5);
-    	//intake.setPower(Utility.limit(oi.getRightStick().getRawAxis(2)));
+    	//intake.setPower(0.65);
+    	intake.setPower(15.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

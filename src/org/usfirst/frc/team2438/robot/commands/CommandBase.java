@@ -34,9 +34,9 @@ public abstract class CommandBase extends Command {
         // Show what command your subsystem is running on the SmartDashboard
         drivetrain.init();
         intake.init();
-        winch.init();
-        agitator.init();
-        shooter.init();
+        //winch.init();
+        //agitator.init();
+        //shooter.init();
         //camera.init();
         //distance.init();
     }

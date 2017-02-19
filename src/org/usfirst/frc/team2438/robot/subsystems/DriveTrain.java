@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package org.usfirst.frc.team2438.robot.subsystems;
 
 import org.usfirst.frc.team2438.robot.RobotMap;
@@ -18,10 +13,8 @@ import com.ctre.CANTalon.FeedbackDevice;
 import com.ctre.CANTalon.TalonControlMode;
 
 /**
- *
  * @author koluke
  */
-
 public class DriveTrain extends Subsystem {
 	// hardware //
     private CANTalon      _left;
@@ -30,6 +23,8 @@ public class DriveTrain extends Subsystem {
     private CANTalon      _right;
     private CANTalon      _rightSlave1;
     private CANTalon      _rightSlave2;
+    
+    private double powerMultiplier = 0.7;
     
 	// physical constants //
 	private static final double WHEEL_DIAMETER_INCHES  = 8.0;
@@ -42,7 +37,6 @@ public class DriveTrain extends Subsystem {
     public void init()  {
         // configure left //
     	_left = new CANTalon(RobotMap.driveLeftMain);
-    	//_left.setInverted(true);
     	_left.setFeedbackDevice(FeedbackDevice.QuadEncoder);
     	_left.configEncoderCodesPerRev(ENCODER_TICKS_PER_REV);
     	_left.reverseSensor(true);
@@ -111,8 +105,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("drive-right-tank", right);
     	SmartDashboard.putNumber("drive-left-tank", left);
     	
-    	_left.set(left * 0.7);
-    	_right.set(right * 0.7);
+    	_left.set(left * powerMultiplier);
+    	_right.set(right * powerMultiplier);
     }
     
     /**
@@ -189,6 +183,14 @@ public class DriveTrain extends Subsystem {
     
     public void setRightEncoderDistance(double value) {
     	_right.setPosition(value / ENCODER_INCHES_PER_REV);
+    }
+    
+    public void setMultiplier(double multiplier) {
+    	powerMultiplier = multiplier;
+    }
+    
+    public double getMultiplier() {
+    	return powerMultiplier;
     }
     
     public void debug() {

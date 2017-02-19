@@ -16,7 +16,7 @@ public class Shooter extends Subsystem {
 
 	private CANTalon _shooter;
 	
-	private static double shooterPower = 3100.0;
+	private static double shooterRPM = 3100.0;
 	
 	private static double kF = 0.045;
 	private static double kP = 0.033;
@@ -30,9 +30,6 @@ public class Shooter extends Subsystem {
 		
 		_shooter.setFeedbackDevice(FeedbackDevice.CtreMagEncoder_Relative);
 		_shooter.configEncoderCodesPerRev(ENCODER_TICKS_PER_REV);
-		
-		//_shooter.reverseSensor(true);
-		_shooter.setInverted(false);
 		
 		_shooter.setPosition(0.0);
 		
@@ -50,7 +47,7 @@ public class Shooter extends Subsystem {
     public void initDefaultCommand() { }
     
     public void runShooter() {
-    	_shooter.set(Shooter.shooterPower); //TODO - Change shooter power
+    	_shooter.set(Shooter.shooterRPM);
     }
     
     public void stopShooter() {
@@ -61,12 +58,12 @@ public class Shooter extends Subsystem {
     	_shooter.setPosition(0.0);
     }
     
-    public static void setShooterPower(double shooterPower) {
-    	Shooter.shooterPower = shooterPower;
+    public static void setShooterRPM(double shooterRPM) {
+    	Shooter.shooterRPM = shooterRPM;
     }
     
-    public static double getShooterPower() {
-    	return Shooter.shooterPower;
+    public static double getShooterRPM() {
+    	return Shooter.shooterRPM;
     }
     
     public static void setF(double kF) {
@@ -104,7 +101,7 @@ public class Shooter extends Subsystem {
     public void debug() {
     	SmartDashboard.putNumber("Ticks", _shooter.getEncPosition());
     	SmartDashboard.putNumber("Power", _shooter.getSpeed());
-    	SmartDashboard.putNumber("Shooter Current", _shooter.getOutputCurrent());
+    	//SmartDashboard.putNumber("Shooter Current", _shooter.getOutputCurrent());
     }
 }
 

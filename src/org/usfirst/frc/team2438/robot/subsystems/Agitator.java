@@ -30,10 +30,6 @@ public class Agitator extends Subsystem {
 		_agitator.set(0.0);
 	}
 	
-	public double getCurrent() {
-		return _agitator.getOutputCurrent();
-	}
-	
 	public void debug() {
 		SmartDashboard.putNumber("Agitator Current", _agitator.getOutputCurrent());
 	}

@@ -3,7 +3,7 @@ package org.usfirst.frc.team2438.robot.commands;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
 
 /**
- *
+ * Operates winch
  */
 public class OperateWinch extends CommandBase {
 
