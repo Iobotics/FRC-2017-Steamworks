@@ -3,6 +3,7 @@ package org.usfirst.frc.team2438.robot.subsystems;
 import org.usfirst.frc.team2438.robot.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.ctre.CANTalon;
 
@@ -28,6 +29,9 @@ public class Agitator extends Subsystem {
 	public void stopAgitator() {
 		_agitator.set(0.0);
 	}
-
+	
+	public void debug() {
+		SmartDashboard.putNumber("Agitator Current", _agitator.getOutputCurrent());
+	}
 }
 

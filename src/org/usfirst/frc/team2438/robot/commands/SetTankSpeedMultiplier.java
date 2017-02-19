@@ -1,23 +1,30 @@
 package org.usfirst.frc.team2438.robot.commands;
 
 /**
- * Command to intake balls
+ * Toggles tank speed multiplier
  */
-public class OuttakeBalls extends CommandBase {
+public class SetTankSpeedMultiplier extends CommandBase {
 	
-    public OuttakeBalls() {
+	private double multiplier;
+
+    public SetTankSpeedMultiplier() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	this.requires(intake);
+    	requires(drivetrain);
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() { }
+    protected void initialize() {
+    	multiplier = drivetrain.getMultiplier();
+    }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//intake.setPower(-0.65);
-    	intake.setPower(-15.0);
+    	if(multiplier != 1.0) {
+    		drivetrain.setMultiplier(1.0);
+    	} else {
+    		drivetrain.setMultiplier(0.7);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,7 +34,6 @@ public class OuttakeBalls extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	intake.setPower(0.0);
     }
 
     // Called when another command which requires one or more of the same

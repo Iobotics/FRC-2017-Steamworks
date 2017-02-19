@@ -19,5 +19,4 @@ public class Winch extends Subsystem{
 	public void setPower(double power){
 		_winch.set(power);
 	}
-
 }

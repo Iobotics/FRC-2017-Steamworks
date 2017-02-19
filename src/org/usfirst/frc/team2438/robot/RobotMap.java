@@ -9,32 +9,29 @@ package org.usfirst.frc.team2438.robot;
 public class RobotMap {
 
     // drive //
-    public static final int driveLeftMain      = 3;
-    public static final int driveLeftSlave1    = 2;
-    public static final int driveLeftSlave2    = 1;
-    public static final int driveRightMain     = 6;
-    public static final int driveRightSlave1   = 5;
+    public static final int driveLeftMain      = 10;
+    public static final int driveLeftSlave1    = 9;
+    public static final int driveLeftSlave2    = 7;
+    public static final int driveRightMain     = 2;
+    public static final int driveRightSlave1   = 3;
     public static final int driveRightSlave2   = 4;
     
     // Agitator //
     
+    public static final int agitatorTalon = 13; // TODO - Change ID
+    
     // intake //
     
-    public static final int intake = 13; //TODO - Change ID
+    public static final int intakeMain = 8;
+    public static final int intakeSlave = 5;
     
     // shooter //
     
-    public static final int shooterTalon = 9; //TODO - Change ID (previous 13)
+    public static final int shooterTalon = 13; //TODO - Change ID
     
     // camera & distance //
 	
 	// winch //
     
-	public static final int winchTalon = 13; //TODO - Change ID
-	
-	// gear system //
-    
-    // hopper //
-	
-    public static final int agitatorTalon = 13; // TODO - Change ID
+	public static final int winchTalon = 13; //TODO - Change ID    
 }
