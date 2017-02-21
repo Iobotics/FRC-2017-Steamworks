@@ -14,15 +14,13 @@ public class Agitator extends Subsystem {
 
     private CANTalon _agitator;
 	
-    private final double power = 1.0; 
-	
 	public void init(){
 		_agitator = new CANTalon(RobotMap.agitatorTalon);
 	}
 	
 	public void initDefaultCommand() { }
 	
-	public void runAgitator(){
+	public void runAgitator(double power){
 		_agitator.set(power);
 	}
 	

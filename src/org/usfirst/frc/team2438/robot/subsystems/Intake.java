@@ -13,35 +13,36 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Intake extends Subsystem {
 	
-	private CANTalon _intake;
-	private CANTalon _intakeSlave;
+	private CANTalon _left;
+	private CANTalon _right;
 
 	public void init(){
-		_intake = new CANTalon(RobotMap.intakeMain);
-		_intake.changeControlMode(TalonControlMode.Current);
-		_intake.set(0.0);
+		_left = new CANTalon(RobotMap.intakeLeft);
+		_left.changeControlMode(TalonControlMode.Current);
+		_left.set(0.0);
 		
-		_intakeSlave = new CANTalon(RobotMap.intakeSlave);
-		_intakeSlave.changeControlMode(TalonControlMode.Current);
-		_intakeSlave.set(0.0);
-		//_intakeSlave.setInverted(true);
+		_right = new CANTalon(RobotMap.intakeRight);
+		_right.changeControlMode(TalonControlMode.Current);
+		_right.set(0.0);
 		
-		_intake.setF(0.06);
-		_intakeSlave.setF(0.06);
-		_intake.setP(0.0);
-		_intakeSlave.setP(0.0);
+		_left.setF(0.04);
+		_right.setF(0.05);
+		_left.setP(0.22);
+		_right.setP(0.1);//22);
 	}
 
     public void initDefaultCommand() { }
     
     public void setPower(double power) {
-    	_intake.set(power);
-    	_intakeSlave.set(-power);
+    	_left.set(power);
+    	_right.set(-power);
     }
     
     public void debug() {
-    	SmartDashboard.putNumber("Intake current", _intakeSlave.getOutputCurrent());
-    	SmartDashboard.putNumber("Intake PercentVBus", (double)(_intake.getOutputVoltage()/_intake.getBusVoltage()));
+    	SmartDashboard.putNumber("Left intake current", _left.getOutputCurrent());
+    	SmartDashboard.putNumber("Right intake current", _right.getOutputCurrent());
+    	SmartDashboard.putNumber("Left intake voltage", _left.getOutputVoltage());
+    	SmartDashboard.putNumber("Right intake voltage", _right.getOutputVoltage());
     }
 }
 

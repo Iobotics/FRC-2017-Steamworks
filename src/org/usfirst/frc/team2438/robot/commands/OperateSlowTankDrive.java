@@ -1,30 +1,29 @@
 package org.usfirst.frc.team2438.robot.commands;
 
-import org.usfirst.frc.team2438.robot.subsystems.DriveTrain;
-
-import edu.wpi.first.wpilibj.command.Command;
-
 /**
- *
+ * Slow tank drive
  */
 public class OperateSlowTankDrive extends CommandBase {
 	
 	private double multiplier;
 
-    public OperateSlowTankDrive() {
+    public OperateSlowTankDrive(double speedMultiplier) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	requires(drivetrain);
+    	this.multiplier = speedMultiplier;
     }
 
     // Called just before this Command runs the first time
-    protected void initialize() {
-    	multiplier = drivetrain.getMultiplier();
-    }
+    protected void initialize() { }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	drivetrain.setMultiplier(multiplier);
+    	if(drivetrain.getMultiplier() != 1.0) {
+    		drivetrain.setMultiplier(1.0);
+    	} else {
+    		drivetrain.setMultiplier(multiplier);
+    	}
     }
 
     // Make this return true when this Command no longer needs to run execute()

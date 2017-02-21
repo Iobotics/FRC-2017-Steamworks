@@ -22,8 +22,8 @@ public class RobotMap {
     
     // intake //
     
-    public static final int intakeMain = 8;
-    public static final int intakeSlave = 5;
+    public static final int intakeLeft  = 8;
+    public static final int intakeRight = 5;
     
     // shooter //
     

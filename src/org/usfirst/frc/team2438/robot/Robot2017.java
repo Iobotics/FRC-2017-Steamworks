@@ -3,6 +3,7 @@ package org.usfirst.frc.team2438.robot;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
 import org.usfirst.frc.team2438.robot.subsystems.Shooter;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Preferences;
@@ -97,6 +98,8 @@ public class Robot2017 extends IterativeRobot {
 		//CommandBase.shooter.debug();
 		//CommandBase.agitator.debug();
 		CommandBase.intake.debug();
+		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
+		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
 	}
 
 	/**

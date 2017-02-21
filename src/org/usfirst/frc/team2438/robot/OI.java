@@ -28,7 +28,8 @@ public class OI {
     private final Button _autoTestButton4  = new JoystickButton(_rStick, 11);
     private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
     
-	//private final Button _agitatorButton = new JoystickButton(_rStick, 3);
+	private final Button _agitatorButton = new JoystickButton(_lStick, 4);
+	private final Button _agitatorRevButton = new JoystickButton(_lStick, 5);
 	
 	// TODO - Assign buttons for winch //
 	//private final Button _retractWinchButton = new JoystickButton();
@@ -42,14 +43,15 @@ public class OI {
         _intakeButton.toggleWhenPressed(new IntakeBalls());
         _outtakeButton.toggleWhenPressed(new OuttakeBalls());
 
-        //_agitatorButton.toggleWhenPressed(new ActivateAgitator());
+        _agitatorButton.toggleWhenPressed(new ActivateAgitator(1.0));
+        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(-1.0));
         
         //_retractWinchButton.whenPressed(new RetractWinch());
         //_operateWinchButton.whenPressed(new OperateWinch());
         
         //_shooterToggleButton.toggleWhenPressed(new ShootBall());
         
-        _slowDriveButton.whenPressed(new SetTankSpeedMultiplier());
+        _slowDriveButton.whenPressed(new OperateSlowTankDrive(0.7));
     }
     
     public Joystick getLeftStick()  {
