@@ -2,6 +2,7 @@ package org.usfirst.frc.team2438.robot;
 
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
 import org.usfirst.frc.team2438.robot.subsystems.Shooter;
+import org.usfirst.frc.team2438.robot.util.Utility;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -23,6 +24,8 @@ public class Robot2017 extends IterativeRobot {
 	PowerDistributionPanel _pdp;
 	Preferences            _prefs;
 	
+	Shooter shooter;
+	
 	final String defaultAuto = "Default";
 	final String customAuto = "Auto 1";
 	String autoSelected;
@@ -39,9 +42,10 @@ public class Robot2017 extends IterativeRobot {
     	_pdp.clearStickyFaults();
     	
     	_prefs = Preferences.getInstance();
-    	//this.displayPreferences();
         
     	CommandBase.init();
+    	shooter = CommandBase.shooter;
+    	this.displayPreferences();
 		
 		chooser.addDefault("Default Auto", defaultAuto);
 		chooser.addObject("Auto 1", customAuto);
@@ -85,8 +89,9 @@ public class Robot2017 extends IterativeRobot {
 	
 	@Override
 	public void teleopInit() {
-		//CommandBase.shooter.resetShooter();
-		//this.setPreferences();
+		CommandBase.shooter.resetShooter();
+		this.setPreferences();
+		this.displayPreferences();
 	}
 
 	/**
@@ -95,9 +100,9 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		//CommandBase.shooter.debug();
+		CommandBase.shooter.debug();
 		//CommandBase.agitator.debug();
-		CommandBase.intake.debug();
+		//CommandBase.intake.debug();
 		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
 		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
 	}
@@ -114,22 +119,38 @@ public class Robot2017 extends IterativeRobot {
 	 * Display robot preferences
 	 */
 	public void displayPreferences() {
-		_prefs.putDouble("Shooter RPM", Shooter.getShooterRPM());
-		_prefs.putDouble("kF", Shooter.getF());
-		_prefs.putDouble("kP", Shooter.getP());
-		_prefs.putDouble("kI", Shooter.getI());
-		_prefs.putDouble("kD", Shooter.getD());
+		_prefs.putDouble("Shooter RPM", shooter.getShooterRPM());
+		_prefs.putDouble("iZone", shooter.getIZone());
+		_prefs.putDouble("kF", shooter.getF());
+		_prefs.putDouble("kP", shooter.getP());
+		_prefs.putDouble("kI", shooter.getI());
+		_prefs.putDouble("kD", shooter.getD());
 	}
 	
 	/**
 	 * Set robot preferences
 	 */
 	public void setPreferences() {
-		Shooter.setShooterRPM(_prefs.getDouble("Shooter RPM", Shooter.getShooterRPM()));
-		Shooter.setF(_prefs.getDouble("kF", Shooter.getF()));
-		Shooter.setP(_prefs.getDouble("kP", Shooter.getP()));
-		Shooter.setI(_prefs.getDouble("kI", Shooter.getI()));
-		Shooter.setD(_prefs.getDouble("kD", Shooter.getD()));
+		double rpm = _prefs.getDouble("Shooter RPM", shooter.getShooterRPM());
+		double iZone = _prefs.getInt("iZone", shooter.getIZone());
+		double kF = _prefs.getDouble("kF", shooter.getF());
+		double kP = _prefs.getDouble("kP", shooter.getP());
+		double kI = _prefs.getDouble("kI", shooter.getI());
+		double kD = _prefs.getDouble("kD", shooter.getD());
+		
+		rpm = Utility.window(rpm, 0, shooter.getMaxRPM());
+		iZone = Utility.window(iZone, 0, shooter.getMaxIZone());
+		kF = Utility.window(kF, 0, shooter.getMaxIZone());
+		kP = Utility.window(kP, 0, shooter.getMaxIZone());
+		kI = Utility.window(kI, 0, shooter.getMaxIZone());
+		kD = Utility.window(kD, 0, shooter.getMaxIZone());
+		
+		shooter.setShooterRPM(rpm);
+		shooter.setIZone((int) Math.round(iZone));
+		shooter.setF(kF);
+		shooter.setP(kP);
+		shooter.setI(kI);
+		shooter.setD(kD);
 	}
 }
 
