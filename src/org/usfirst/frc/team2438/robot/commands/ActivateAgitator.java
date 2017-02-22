@@ -12,7 +12,7 @@ public class ActivateAgitator extends CommandBase {
 	protected void initialize() { }
 
 	protected void execute(){
-		agitator.runAgitator(agitatorPower);
+		agitator.setAgitatorRPM(agitatorPower);
 	}
 	
 	protected boolean isFinished() {
@@ -20,7 +20,7 @@ public class ActivateAgitator extends CommandBase {
 	}
 	
 	protected void end() {
-		agitator.stopAgitator();
+		agitator.setAgitatorRPM(0.0);;
 	}
 	
 	protected void interrupted() {

@@ -19,7 +19,6 @@ public abstract class CommandBase extends Command {
     public static final DriveTrain       drivetrain    = new DriveTrain();
     public static final Intake           intake        = new Intake();
     public static final Agitator         agitator      = new Agitator();
-    //public static final Camera         camera        = new Camera();
     public static final Winch            winch         = new Winch();
     public static final Shooter          shooter       = new Shooter();
 
@@ -35,10 +34,8 @@ public abstract class CommandBase extends Command {
         drivetrain.init();
         intake.init();
         //winch.init();
-        //agitator.init();
-        //shooter.init();
-        //camera.init();
-        //distance.init();
+        agitator.init();
+        shooter.init();
     }
 
     public CommandBase(String name) {

@@ -146,8 +146,9 @@ public class Shooter extends Subsystem {
 	}
 	
     public void debug() {
-    	SmartDashboard.putNumber("Ticks", _shooter.getEncPosition());
-    	SmartDashboard.putNumber("RPM", _shooter.getSpeed());
+    	SmartDashboard.putNumber("Shooter RPM", _shooter.getSpeed());
+    	SmartDashboard.putNumber("Shooter current", _shooter.getOutputCurrent());
+    	SmartDashboard.putNumber("Shooter voltage", _shooter.getOutputVoltage());
     }
 }
 
