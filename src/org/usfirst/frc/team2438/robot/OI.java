@@ -43,8 +43,8 @@ public class OI {
         _intakeButton.toggleWhenPressed(new IntakeBalls());
         _outtakeButton.toggleWhenPressed(new OuttakeBalls());
 
-        _agitatorButton.toggleWhenPressed(new ActivateAgitator(60.0));
-        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(-60.0));
+        _agitatorButton.toggleWhenPressed(new ActivateAgitator(120.0));
+        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(-120.0));
         
         //_retractWinchButton.whenPressed(new RetractWinch());
         //_operateWinchButton.whenPressed(new OperateWinch());

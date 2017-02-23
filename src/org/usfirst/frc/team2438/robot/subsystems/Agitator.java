@@ -27,8 +27,9 @@ public class Agitator extends Subsystem {
 		
 		_agitator.setPosition(0.0);
 		
+		// TODO - Tune
 		_agitator.setIZone(0);
-		_agitator.setF(0.03);
+		_agitator.setF(0.4);
 		_agitator.setP(0.0);
 		_agitator.setI(0.0);
 		_agitator.setD(0.0);

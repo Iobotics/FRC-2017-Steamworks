@@ -5,6 +5,12 @@ package org.usfirst.frc.team2438.robot.util;
  */
 public class Utility {
     
+	public static int window(int input, int min, int max) {
+        if(input < min) return min;
+        if(input > max) return max;
+        return input;
+    }
+	
     public static double window(double input, double min, double max) {
         if(input < min) return min;
         if(input > max) return max;

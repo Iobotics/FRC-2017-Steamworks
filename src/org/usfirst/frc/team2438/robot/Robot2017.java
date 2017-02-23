@@ -132,7 +132,7 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	public void setPreferences() {
 		double rpm = _prefs.getDouble("Shooter RPM", shooter.getShooterRPM());
-		double iZone = _prefs.getInt("iZone", shooter.getIZone());
+		int iZone = _prefs.getInt("iZone", shooter.getIZone());
 		double kF = _prefs.getDouble("kF", shooter.getF());
 		double kP = _prefs.getDouble("kP", shooter.getP());
 		double kI = _prefs.getDouble("kI", shooter.getI());
@@ -146,7 +146,7 @@ public class Robot2017 extends IterativeRobot {
 		kD = Utility.window(kD, 0, shooter.getMaxIZone());
 		
 		shooter.setShooterRPM(rpm);
-		shooter.setIZone((int) Math.round(iZone));
+		shooter.setIZone(iZone);
 		shooter.setF(kF);
 		shooter.setP(kP);
 		shooter.setI(kI);
