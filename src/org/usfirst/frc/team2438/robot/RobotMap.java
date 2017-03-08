@@ -27,7 +27,7 @@ public class RobotMap {
     
     // shooter //
     
-    public static final int shooterTalon = 13; //TODO - Change ID
+    public static final int shooterTalon = 1;
     
     // camera & distance //
 	

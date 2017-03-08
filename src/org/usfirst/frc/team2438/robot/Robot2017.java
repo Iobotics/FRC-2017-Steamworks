@@ -44,7 +44,7 @@ public class Robot2017 extends IterativeRobot {
     	_prefs = Preferences.getInstance();
         
     	CommandBase.init();
-    	shooter = CommandBase.shooter;
+    	
     	this.displayPreferences();
 		
 		chooser.addDefault("Default Auto", defaultAuto);
@@ -101,7 +101,7 @@ public class Robot2017 extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		CommandBase.shooter.debug();
-		CommandBase.agitator.debug();
+		//CommandBase.agitator.debug();
 		CommandBase.intake.debug();
 		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
 		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
@@ -119,6 +119,8 @@ public class Robot2017 extends IterativeRobot {
 	 * Display robot preferences
 	 */
 	public void displayPreferences() {
+		shooter = CommandBase.shooter;
+		
 		_prefs.putDouble("Shooter RPM", shooter.getShooterRPM());
 		_prefs.putDouble("iZone", shooter.getIZone());
 		_prefs.putDouble("kF", shooter.getF());
@@ -138,12 +140,12 @@ public class Robot2017 extends IterativeRobot {
 		double kI = _prefs.getDouble("kI", shooter.getI());
 		double kD = _prefs.getDouble("kD", shooter.getD());
 		
-		rpm = Utility.window(rpm, 0, shooter.getMaxRPM());
-		iZone = Utility.window(iZone, 0, shooter.getMaxIZone());
-		kF = Utility.window(kF, 0, shooter.getMaxIZone());
-		kP = Utility.window(kP, 0, shooter.getMaxIZone());
-		kI = Utility.window(kI, 0, shooter.getMaxIZone());
-		kD = Utility.window(kD, 0, shooter.getMaxIZone());
+		rpm = Utility.window(rpm, 0, shooter.MAX_RPM);
+		iZone = Utility.window(iZone, 0, shooter.MAX_IZONE);
+		kF = Utility.window(kF, 0, shooter.MAX_KF);
+		kP = Utility.window(kP, 0, shooter.MAX_KP);
+		kI = Utility.window(kI, 0, shooter.MAX_KI);
+		kD = Utility.window(kD, 0, shooter.MAX_KD);
 		
 		shooter.setShooterRPM(rpm);
 		shooter.setIZone(iZone);

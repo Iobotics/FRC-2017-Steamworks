@@ -24,13 +24,13 @@ public class Shooter extends Subsystem {
 	private double kI = 0.0;
 	private double kD = 0.0;
 	
-	private final double MAX_RPM = 3100.0;
+	public final double MAX_RPM = 3400.0;
 	
-	private final int MAX_IZONE = (int) Math.round(iZone * 1.2);
-	private final double MAX_KF = kF * 1.5;
-	private final double MAX_KP = kP * 1.2;
-	private final double MAX_KI = kI * 1.2;
-	private final double MAX_KD = kD * 1.2;
+	public final int MAX_IZONE = (int) Math.round(iZone * 1.2);
+	public final double MAX_KF = kF * 1.5;
+	public final double MAX_KP = kP * 1.2;
+	public final double MAX_KI = kI * 1.2;
+	public final double MAX_KD = kD * 1.2;
 	
 	private static final int ENCODER_TICKS_PER_REV = 1024;
 	
@@ -119,30 +119,6 @@ public class Shooter extends Subsystem {
 	
 	public double getD() {
 		return this.kD;
-	}
-	
-	public double getMaxRPM() {
-		return this.MAX_RPM;
-	}
-	
-	public int getMaxIZone() {
-		return this.MAX_IZONE;
-	}
-	
-	public double getMaxF() {
-		return this.MAX_KF;
-	}
-	
-	public double getMaxP() {
-		return this.MAX_KP;
-	}
-	
-	public double getMaxI() {
-		return this.MAX_KI;
-	}
-	
-	public double getMaxD() {
-		return this.MAX_KD;
 	}
 	
     public void debug() {
