@@ -21,6 +21,7 @@ public abstract class CommandBase extends Command {
     public static final Agitator         agitator      = new Agitator();
     public static final Winch            winch         = new Winch();
     public static final Shooter          shooter       = new Shooter();
+    public static final NavigationSensor navsensor	   = new NavigationSensor();
 
     public static void init() {
         // This MUST be here. If the OI creates Commands (which it very likely
@@ -36,6 +37,7 @@ public abstract class CommandBase extends Command {
         //winch.init();
         //agitator.init();
         shooter.init();
+        //navsensor.init();
     }
 
     public CommandBase(String name) {
