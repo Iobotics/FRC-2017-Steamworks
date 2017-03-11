@@ -1,7 +1,7 @@
 package org.usfirst.frc.team2438.robot.subsystems;
 
 import org.usfirst.frc.team2438.robot.RobotMap;
-//import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
+import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
 import org.usfirst.frc.team2438.robot.util.Utility;
 
 import com.ctre.CANTalon;
@@ -65,7 +65,7 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        //this.setDefaultCommand(new OperateTankDrive());
+        this.setDefaultCommand(new OperateTankDrive());
         //this.setDefaultCommand(new OperateArcadeDrive());
     }
 

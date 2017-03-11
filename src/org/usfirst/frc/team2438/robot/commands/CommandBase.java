@@ -32,10 +32,10 @@ public abstract class CommandBase extends Command {
         oi = new OI();
 
         // Show what command your subsystem is running on the SmartDashboard
-        //drivetrain.init();
+        drivetrain.init();
         intake.init();
         //winch.init();
-        //agitator.init();
+        agitator.init();
         shooter.init();
         //navsensor.init();
     }

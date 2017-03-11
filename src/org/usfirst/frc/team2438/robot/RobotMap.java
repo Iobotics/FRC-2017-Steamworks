@@ -18,7 +18,7 @@ public class RobotMap {
     
     // Agitator //
     
-    public static final int agitatorTalon = 13; // TODO - Change ID
+    public static final int agitatorTalon = 6;
     
     // intake //
     

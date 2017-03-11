@@ -101,7 +101,7 @@ public class Robot2017 extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		CommandBase.shooter.debug();
-		//CommandBase.agitator.debug();
+		CommandBase.agitator.debug();
 		CommandBase.intake.debug();
 		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
 		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());

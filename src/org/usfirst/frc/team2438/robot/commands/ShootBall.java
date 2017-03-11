@@ -16,6 +16,8 @@ public class ShootBall extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	//shooter.runShooter();
+    	shooter.setShooterRPM(shooter.MAX_RPM + (-oi.getRightStick().getZ() * 125.0));
     	shooter.runShooter();
     }
 

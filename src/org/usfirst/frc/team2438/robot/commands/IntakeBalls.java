@@ -17,7 +17,7 @@ public class IntakeBalls extends CommandBase {
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
     	//intake.setPower(0.65);
-    	intake.setPower(-oi.getRightStick().getZ() * 20.0);
+    	intake.setPower(-oi.getLeftStick().getZ() * 20.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()

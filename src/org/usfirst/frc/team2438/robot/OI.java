@@ -40,18 +40,18 @@ public class OI {
     private final Button _slowDriveButton = new JoystickButton(_rStick, 3);
     
     public OI() {
-        _intakeButton.toggleWhenPressed(new IntakeBalls());
-        _outtakeButton.toggleWhenPressed(new OuttakeBalls());
+        _intakeButton.toggleWhenPressed(new IntakeBalls()); // rStick 4
+        _outtakeButton.toggleWhenPressed(new OuttakeBalls()); // rStick 5
 
-        _agitatorButton.toggleWhenPressed(new ActivateAgitator(120.0));
-        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(-120.0));
+        _agitatorButton.toggleWhenPressed(new ActivateAgitator(265.0)); // lStick 4
+        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(-265.0)); // lStick 5
         
         //_retractWinchButton.whenPressed(new RetractWinch());
         //_operateWinchButton.whenPressed(new OperateWinch());
         
-        _shooterToggleButton.toggleWhenPressed(new ShootBall());
+        _shooterToggleButton.toggleWhenPressed(new ShootBall()); // rStick 2
         
-        _slowDriveButton.whenPressed(new OperateSlowTankDrive(0.7));
+        _slowDriveButton.whenPressed(new OperateSlowTankDrive(0.7)); // rStick 3
     }
     
     public Joystick getLeftStick()  {
