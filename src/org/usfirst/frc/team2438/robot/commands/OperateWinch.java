@@ -17,7 +17,7 @@ public class OperateWinch extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	winch.setPower(1.0);
+    	winch.setPower(0.6);
     }
 
     // Make this return true when this Command no longer needs to run execute()
@@ -27,7 +27,7 @@ public class OperateWinch extends CommandBase {
 
     // Called once after isFinished returns true
     protected void end() {
-    	winch.setPower(0);
+    	winch.setPower(0.0);
     }
 
     // Called when another command which requires one or more of the same

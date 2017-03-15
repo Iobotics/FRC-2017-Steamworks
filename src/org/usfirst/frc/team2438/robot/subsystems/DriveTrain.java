@@ -1,6 +1,7 @@
 package org.usfirst.frc.team2438.robot.subsystems;
 
 import org.usfirst.frc.team2438.robot.RobotMap;
+import org.usfirst.frc.team2438.robot.commands.OperateArcadeDrive;
 import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
 import org.usfirst.frc.team2438.robot.util.Utility;
 
@@ -24,7 +25,7 @@ public class DriveTrain extends Subsystem {
     private CANTalon      _rightSlave1;
     private CANTalon      _rightSlave2;
     
-    private double powerMultiplier = 0.7;
+    private double powerMultiplier = 0.85;
     
 	// physical constants //
 	private static final double WHEEL_DIAMETER_INCHES  = 8.0;
@@ -65,8 +66,8 @@ public class DriveTrain extends Subsystem {
 
     public void initDefaultCommand() {
         // Set the default command for a subsystem here.
-        this.setDefaultCommand(new OperateTankDrive());
-        //this.setDefaultCommand(new OperateArcadeDrive());
+        //this.setDefaultCommand(new OperateTankDrive());
+        this.setDefaultCommand(new OperateArcadeDrive());
     }
 
     /**

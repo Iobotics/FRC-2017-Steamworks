@@ -1,5 +1,6 @@
 package org.usfirst.frc.team2438.robot;
 
+import org.usfirst.frc.team2438.robot.commands.CalibrateNavigationSensor;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
 import org.usfirst.frc.team2438.robot.subsystems.Shooter;
 import org.usfirst.frc.team2438.robot.util.Utility;
@@ -44,6 +45,7 @@ public class Robot2017 extends IterativeRobot {
     	_prefs = Preferences.getInstance();
         
     	CommandBase.init();
+    	new CalibrateNavigationSensor().start();
     	
     	this.displayPreferences();
 		
@@ -100,11 +102,7 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		CommandBase.shooter.debug();
-		CommandBase.agitator.debug();
-		CommandBase.intake.debug();
-		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
-		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
+		this.debugStuff();
 	}
 
 	/**
@@ -113,6 +111,20 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void testPeriodic() {
 		LiveWindow.run();
+	}
+	
+	/**
+	 * Subsystem debuggers
+	 */
+	public void debugStuff() {
+		CommandBase.shooter.debug();
+		CommandBase.agitator.debug();
+		CommandBase.intake.debug();
+		CommandBase.winch.debug();
+		CommandBase.navsensor.debug();
+		
+		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
+		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
 	}
 	
 	/**

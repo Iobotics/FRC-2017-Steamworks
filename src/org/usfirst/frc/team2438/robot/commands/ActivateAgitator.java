@@ -20,7 +20,7 @@ public class ActivateAgitator extends CommandBase {
 	}
 	
 	protected void end() {
-		agitator.setAgitatorRPM(0.0);;
+		agitator.setAgitatorRPM(0.0);
 	}
 	
 	protected void interrupted() {

@@ -16,7 +16,7 @@ public class Agitator extends Subsystem {
 
     private CANTalon _agitator;
 
-	private static final int ENCODER_TICKS_PER_REV = 1024;
+	private static final int ENCODER_TICKS_PER_REV = 497;
 	
 	public void init(){
 		_agitator = new CANTalon(RobotMap.agitatorTalon);
@@ -27,10 +27,11 @@ public class Agitator extends Subsystem {
 		
 		_agitator.setPosition(0.0);
 		
+		_agitator.setProfile(1);
 		// TODO - Tune
 		_agitator.setIZone(0);
-		_agitator.setF(0.4);
-		_agitator.setP(0.0);
+		_agitator.setF(3.0);
+		_agitator.setP(0.4);
 		_agitator.setI(0.0);
 		_agitator.setD(0.0);
 		

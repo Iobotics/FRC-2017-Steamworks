@@ -19,8 +19,8 @@ public class Shooter extends Subsystem {
 	private double shooterRPM = 1185.0;
 	
 	private int iZone = 0;
-	private double kF = 0.035;
-	private double kP = 0.045;
+	private double kF = 0.032;
+	private double kP = 0.055;
 	private double kI = 0.0;
 	private double kD = 0.0;
 	

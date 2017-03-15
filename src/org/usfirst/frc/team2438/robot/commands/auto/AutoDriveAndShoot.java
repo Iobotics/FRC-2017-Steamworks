@@ -8,10 +8,10 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoDriveAndShoot extends CommandGroup {
 
     public AutoDriveAndShoot() {
-    	this.addSequential(new AutoDriveStraight(10, 0.35, 10));
-    	this.addSequential(new AutoTurn(-90));
-        this.addSequential(new AutoDriveStraight(10, 0.35, 10));
-        this.addSequential(new AutoShootBall(6));
+    	this.addSequential(new AutoDriveStraight(90, 0.35, 5));
+    	//this.addSequential(new AutoTurn(-90));
+        //this.addSequential(new AutoDriveStraight(10, 0.35));
+        //this.addSequential(new AutoShootBall(6));
     }
     
 }

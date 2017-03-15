@@ -34,10 +34,10 @@ public abstract class CommandBase extends Command {
         // Show what command your subsystem is running on the SmartDashboard
         drivetrain.init();
         intake.init();
-        //winch.init();
+        winch.init();
         agitator.init();
         shooter.init();
-        //navsensor.init();
+        navsensor.init();
     }
 
     public CommandBase(String name) {

@@ -33,5 +33,5 @@ public class RobotMap {
 	
 	// winch //
     
-	public static final int winchTalon = 13; //TODO - Change ID    
+	public static final int winchTalon = 11;     
 }

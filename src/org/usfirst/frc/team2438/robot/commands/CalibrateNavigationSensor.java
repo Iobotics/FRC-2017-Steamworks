@@ -3,12 +3,16 @@ package org.usfirst.frc.team2438.robot.commands;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
 
 /**
- * Retract the winch
+ *
  */
-public class RetractWinch extends CommandBase {
+public class CalibrateNavigationSensor extends CommandBase {
 
-    public RetractWinch() {
-        requires(winch);
+	//private static final int TIMEOUT_SECS = 10;
+	
+    public CalibrateNavigationSensor() {
+    	requires(navsensor);
+    	this.setRunWhenDisabled(true);
+    	//this.setTimeout(TIMEOUT_SECS);
     }
 
     // Called just before this Command runs the first time
@@ -17,17 +21,16 @@ public class RetractWinch extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	winch.setPower(-1.0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return !navsensor.isCalibrating() || this.isTimedOut();
     }
 
     // Called once after isFinished returns true
     protected void end() {
-    	winch.setPower(0.0);
+    	navsensor.zeroGyro();
     }
 
     // Called when another command which requires one or more of the same
