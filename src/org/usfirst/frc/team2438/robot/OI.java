@@ -35,7 +35,7 @@ public class OI {
 	private final Button _retractWinchButton = new JoystickButton(_lStick, 10);
 	private final Button _operateWinchButton = new JoystickButton(_lStick, 3);
 	
-	private final Button _shooterToggleButton = new JoystickButton(_rStick, 3);
+	private final Button _shooterButton = new JoystickButton(_rStick, 3);
     
     //private final Button _slowDriveButton = new JoystickButton(_rStick, 3);
     
@@ -49,7 +49,7 @@ public class OI {
         _retractWinchButton.whileHeld(new RetractWinch());
         _operateWinchButton.whileHeld(new OperateWinch());
         
-        _shooterToggleButton.toggleWhenPressed(new ShootBall());
+        _shooterButton.whileHeld(new ShootBall());
         
         //_slowDriveButton.whenPressed(new OperateSlowTankDrive(0.7));
     }
