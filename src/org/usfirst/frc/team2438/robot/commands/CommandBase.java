@@ -38,7 +38,7 @@ public abstract class CommandBase extends Command {
         winch.init();
         agitator.init();
         shooter.init();
-        lidar.init();
+        //lidar.init();
         navsensor.init();
     }
 

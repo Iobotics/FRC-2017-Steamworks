@@ -1,6 +1,6 @@
 package org.usfirst.frc.team2438.robot.subsystems;
 
-import org.usfirst.frc.team2438.robot.commands.ReadLIDAR;
+//import org.usfirst.frc.team2438.robot.commands.ReadLIDAR;
 
 import edu.wpi.first.wpilibj.I2C;
 import edu.wpi.first.wpilibj.I2C.Port;
@@ -8,7 +8,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**
- *
+ * LIDAR
  */
 public class LaserSensor extends Subsystem {
 
@@ -52,7 +52,7 @@ public class LaserSensor extends Subsystem {
 	}
 	
 	public void initDefaultCommand() {
-		this.setDefaultCommand(new ReadLIDAR());
+		//this.setDefaultCommand(new ReadLIDAR());
 	}
 }
 
