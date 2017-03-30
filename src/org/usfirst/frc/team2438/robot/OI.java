@@ -18,7 +18,7 @@ public class OI {
     
     // driver buttons //
     private final Button _intakeButton = new JoystickButton(_rStick, 1);
-    private final Button _outtakeButton = new JoystickButton(_lStick, 4);
+    private final Button _outtakeButton = new JoystickButton(_lStick, 1);
     
     // auto test buttons //
     /*private final Button _autoTestButton0  = new JoystickButton(_rStick, 7);
@@ -28,32 +28,27 @@ public class OI {
     private final Button _autoTestButton4  = new JoystickButton(_rStick, 11);
     private final Button _autoTestButton5  = new JoystickButton(_rStick, 6);*/
     
-	private final Button _agitatorButton = new JoystickButton(_lStick, 1);
-	private final Button _agitatorRevButton = new JoystickButton(_lStick, 5);
+	private final Button _agitatorButton = new JoystickButton(_lStick, 3);
+	private final Button _agitatorRevButton = new JoystickButton(_lStick, 4);
 	
-	// TODO - Assign buttons for winch //
 	private final Button _retractWinchButton = new JoystickButton(_lStick, 10);
-	private final Button _operateWinchButton = new JoystickButton(_lStick, 3);
+	private final Button _operateWinchButton = new JoystickButton(_lStick, 2);
 	
 	private final Button _shooterButton = new JoystickButton(_rStick, 3);
-	private final Button _shooterRevButton = new JoystickButton(_rStick, 2);
-    
-    //private final Button _slowDriveButton = new JoystickButton(_rStick, 3);
+	private final Button _shooterRevButton = new JoystickButton(_rStick, 4);
     
     public OI() {
-        _intakeButton.whileHeld(new IntakeBalls());
-        //_outtakeButton.toggleWhenPressed(new OuttakeBalls());
+        _intakeButton.whileHeld(new IntakeBalls()); // rStick trigger
+        _outtakeButton.toggleWhenPressed(new OuttakeBalls()); // lStick trigger
 
-        _agitatorButton.whileHeld(new ActivateAgitator(-100.0));
-        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(100.0));
+        _agitatorButton.whileHeld(new ActivateAgitator(-100.0)); // lStick 3
+        _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(100.0)); // lStick 4
         
-        _retractWinchButton.whileHeld(new RetractWinch());
-        _operateWinchButton.whileHeld(new OperateWinch());
+        _retractWinchButton.whileHeld(new RetractWinch()); // lStick 10
+        _operateWinchButton.whileHeld(new OperateWinch()); // lStick 2
         
-        _shooterButton.whileHeld(new ShootBall());
-        _shooterRevButton.whileHeld(new ReverseShooter());
-        
-        //_slowDriveButton.whenPressed(new OperateSlowTankDrive(0.7));
+        _shooterButton.whileHeld(new ShootBall()); // rStick 3
+        _shooterRevButton.whileHeld(new ReverseShoot()); // rStick 4
     }
     
     public Joystick getLeftStick()  {

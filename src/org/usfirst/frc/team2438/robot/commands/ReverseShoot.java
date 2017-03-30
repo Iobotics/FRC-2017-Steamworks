@@ -1,11 +1,11 @@
 package org.usfirst.frc.team2438.robot.commands;
 
 /**
- * Shoots balls
+ *
  */
-public class ShootBall extends CommandBase {
+public class ReverseShoot extends CommandBase {
 
-    public ShootBall() {
+    public ReverseShoot() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	this.requires(shooter);
@@ -16,7 +16,7 @@ public class ShootBall extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setShooterRPM(shooter.MAX_RPM + (-oi.getRightStick().getZ() * 125.0));
+    	shooter.setShooterRPM(-shooter.MAX_RPM - (-oi.getRightStick().getZ() * 125.0));
     	shooter.runShooter();
     }
 
