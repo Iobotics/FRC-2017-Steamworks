@@ -8,10 +8,11 @@ package org.usfirst.frc.team2438.robot;
  */
 public class RobotMap {
 
-    // drive //
+    // Drive //
     public static final int driveLeftMain      = 10;
     public static final int driveLeftSlave1    = 9;
     public static final int driveLeftSlave2    = 7;
+    
     public static final int driveRightMain     = 2;
     public static final int driveRightSlave1   = 3;
     public static final int driveRightSlave2   = 4;
@@ -20,18 +21,16 @@ public class RobotMap {
     
     public static final int agitatorTalon = 6;
     
-    // intake //
+    // Intake //
     
     public static final int intakeLeft  = 8;
     public static final int intakeRight = 5;
     
-    // shooter //
+    // Shooter //
     
     public static final int shooterTalon = 1;
-    
-    // camera & distance //
 	
-	// winch //
+	// Winch //
     
 	public static final int winchTalon = 11;     
 }

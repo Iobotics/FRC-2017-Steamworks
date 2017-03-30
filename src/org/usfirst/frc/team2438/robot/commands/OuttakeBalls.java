@@ -1,9 +1,11 @@
 package org.usfirst.frc.team2438.robot.commands;
 
 /**
- * Command to intake balls
+ * Command to outtake balls
  */
 public class OuttakeBalls extends CommandBase {
+	
+	private final double MAX_POWER = -16.0;
 	
     public OuttakeBalls() {
         // Use requires() here to declare subsystem dependencies
@@ -16,8 +18,8 @@ public class OuttakeBalls extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//intake.setPower(-0.65);
-    	intake.setPower(-5.0);
+    	// Outtake throttle range between 0.0A and -16.0A
+    	intake.setPower((1.0 - oi.getLeftStick().getZ()) * (MAX_POWER / 2));
     }
 
     // Make this return true when this Command no longer needs to run execute()

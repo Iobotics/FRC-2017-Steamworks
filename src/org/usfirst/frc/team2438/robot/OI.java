@@ -14,7 +14,6 @@ public class OI {
 	// joysticks //
     private final Joystick _lStick = new Joystick(1);
     private final Joystick _rStick = new Joystick(2);
-    private final Joystick _xStick = new Joystick(3);
     
     // driver buttons //
     private final Button _intakeButton = new JoystickButton(_rStick, 1);
@@ -38,17 +37,17 @@ public class OI {
 	private final Button _shooterRevButton = new JoystickButton(_rStick, 4);
     
     public OI() {
-        _intakeButton.whileHeld(new IntakeBalls()); // rStick trigger
-        _outtakeButton.toggleWhenPressed(new OuttakeBalls()); // lStick trigger
+        _intakeButton.whileHeld(new IntakeBalls());						   // rStick trigger
+        _outtakeButton.toggleWhenPressed(new OuttakeBalls());			   // lStick trigger
 
-        _agitatorButton.whileHeld(new ActivateAgitator(-100.0)); // lStick 3
+        _agitatorButton.whileHeld(new ActivateAgitator(-100.0));		   // lStick 3
         _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(100.0)); // lStick 4
         
-        _retractWinchButton.whileHeld(new RetractWinch()); // lStick 2
-        _operateWinchButton.whileHeld(new OperateWinch()); // lStick 10
+        _retractWinchButton.whileHeld(new RetractWinch());				   // lStick 2
+        _operateWinchButton.whileHeld(new OperateWinch());				   // lStick 10
         
-        _shooterButton.whileHeld(new ShootBall()); // rStick 3
-        _shooterRevButton.whileHeld(new ReverseShoot()); // rStick 4
+        _shooterButton.whileHeld(new ShootBall());						   // rStick 3
+        _shooterRevButton.whileHeld(new ReverseShooter());				   // rStick 4
     }
     
     public Joystick getLeftStick()  {
@@ -57,9 +56,5 @@ public class OI {
     
     public Joystick getRightStick() {
         return _rStick;
-    }
-    
-    public Joystick getXStick() {
-    	return _xStick;
     }
 }

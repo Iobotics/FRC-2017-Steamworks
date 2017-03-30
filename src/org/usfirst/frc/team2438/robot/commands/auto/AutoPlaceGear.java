@@ -24,8 +24,8 @@ public class AutoPlaceGear extends CommandGroup {
 				this.addSequential(new AutoDriveStraight(8));
 				break;
 			case CENTER:
-				this.addSequential(new AutoDriveStraight(-30));
-				this.addSequential(new AutoDriveStraight(10));
+				this.addSequential(new AutoDriveStraight(-114));
+				this.addSequential(new AutoDriveStraight(30));
 				break;
 			case RIGHT:
 				this.addSequential(new AutoDriveStraight(-35));

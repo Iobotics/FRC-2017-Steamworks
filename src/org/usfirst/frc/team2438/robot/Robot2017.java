@@ -87,7 +87,7 @@ public class Robot2017 extends IterativeRobot {
     		case 4: _autoCommand = new AutoPlaceGear(GearPosition.LEFT); break;
     		case 5: _autoCommand = new AutoPlaceGear(GearPosition.CENTER); break;
     		case 6: _autoCommand = new AutoPlaceGear(GearPosition.RIGHT); break;
-    		case 7: _autoCommand = new AutoDriveStraight(65); break;
+    		case 7: _autoCommand = new AutoDriveStraight(250); break;
     		default: _autoCommand = null; break;
     	}
     	if(_autoCommand != null) _autoCommand.start();

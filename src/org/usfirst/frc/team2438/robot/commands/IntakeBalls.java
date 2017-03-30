@@ -5,6 +5,8 @@ package org.usfirst.frc.team2438.robot.commands;
  */
 public class IntakeBalls extends CommandBase {
 	
+	private final double MAX_POWER = 16.0;
+	
     public IntakeBalls() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
@@ -16,8 +18,8 @@ public class IntakeBalls extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	//intake.setPower(0.65);
-    	intake.setPower(-oi.getLeftStick().getZ() * 20.0);
+    	// Intake throttle range between 0.0A and 16.0A
+    	intake.setPower((1.0 - oi.getLeftStick().getZ()) * (MAX_POWER / 2));
     }
 
     // Make this return true when this Command no longer needs to run execute()

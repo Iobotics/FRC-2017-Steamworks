@@ -23,7 +23,7 @@ public class AutoDriveStraight extends CommandBase implements PIDOutput, PIDSour
 	
 	private static final double MAX_GYRO = 0.25;
 	private static final double kTurn = 0.01;
-	private static final double DEFAULT_POWER = 0.35;
+	private static final double DEFAULT_POWER = 0.50;
 	
 	/**
 	 * @param inches

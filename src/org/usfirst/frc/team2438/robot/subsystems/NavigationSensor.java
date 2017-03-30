@@ -11,7 +11,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- *
+ * AHRS
  */
 public class NavigationSensor extends Subsystem implements PIDSource {
     
@@ -23,7 +23,6 @@ public class NavigationSensor extends Subsystem implements PIDSource {
             /* Alternatively:  I2C.Port.kMXP, SerialPort.Port.kMXP or SerialPort.Port.kUSB     */
             /* See http://navx-mxp.kauailabs.com/guidance/selecting-an-interface/ for details. */
             _ahrs = new AHRS(SPI.Port.kMXP);
-			//_ahrs = new AHRS(SerialPort.Port.kMXP);
         } catch (RuntimeException ex ) {
             DriverStation.reportError("Error instantiating navX MXP:  " + ex.getMessage(), true);
         }
@@ -53,10 +52,7 @@ public class NavigationSensor extends Subsystem implements PIDSource {
 		SmartDashboard.putData("imu", _ahrs);
 	}
 	
-    public void initDefaultCommand() {
-        // Set the default command for a subsystem here.
-        //setDefaultCommand(new MySpecialCommand());
-    }
+    public void initDefaultCommand() { }
     
     public PIDSourceType getPIDSourceType() {
     	return _ahrs.getPIDSourceType();

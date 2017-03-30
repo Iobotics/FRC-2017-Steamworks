@@ -13,6 +13,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class Intake extends Subsystem {
 	
+	private final double LEFT_KF  = 0.04;
+	private final double LEFT_KP  = 0.22;
+	
+	private final double RIGHT_KF = 0.05;	
+	private final double RIGHT_KP = 0.1;
+	
 	private CANTalon _left;
 	private CANTalon _right;
 
@@ -25,10 +31,11 @@ public class Intake extends Subsystem {
 		_right.changeControlMode(TalonControlMode.Current);
 		_right.set(0.0);
 		
-		_left.setF(0.04);
-		_right.setF(0.05);
-		_left.setP(0.22);
-		_right.setP(0.1);//22);
+		_left.setF(LEFT_KF);
+		_left.setP(LEFT_KP);
+		
+		_right.setF(RIGHT_KF);
+		_right.setP(RIGHT_KP);
 	}
 
     public void initDefaultCommand() { }

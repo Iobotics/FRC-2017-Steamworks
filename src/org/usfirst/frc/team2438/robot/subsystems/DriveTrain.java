@@ -2,7 +2,7 @@ package org.usfirst.frc.team2438.robot.subsystems;
 
 import org.usfirst.frc.team2438.robot.RobotMap;
 import org.usfirst.frc.team2438.robot.commands.OperateArcadeDrive;
-import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
+//import org.usfirst.frc.team2438.robot.commands.OperateTankDrive;
 import org.usfirst.frc.team2438.robot.util.Utility;
 
 import com.ctre.CANTalon;
@@ -25,7 +25,7 @@ public class DriveTrain extends Subsystem {
     private CANTalon      _rightSlave1;
     private CANTalon      _rightSlave2;
     
-    private double powerMultiplier = 0.85;
+    private final double POWER_LIMIT = 0.85;
     
 	// physical constants //
 	private static final double WHEEL_DIAMETER_INCHES  = 8.0;
@@ -106,8 +106,8 @@ public class DriveTrain extends Subsystem {
     	SmartDashboard.putNumber("drive-right-tank", right);
     	SmartDashboard.putNumber("drive-left-tank", left);
     	
-    	_left.set(left * powerMultiplier);
-    	_right.set(right * powerMultiplier);
+    	_left.set(left * POWER_LIMIT);
+    	_right.set(right * POWER_LIMIT);
     }
     
     /**
@@ -184,14 +184,6 @@ public class DriveTrain extends Subsystem {
     
     public void setRightEncoderDistance(double value) {
     	_right.setPosition(value / ENCODER_INCHES_PER_REV);
-    }
-    
-    public void setMultiplier(double multiplier) {
-    	powerMultiplier = multiplier;
-    }
-    
-    public double getMultiplier() {
-    	return powerMultiplier;
     }
     
     public void debug() {

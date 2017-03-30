@@ -6,6 +6,8 @@ import org.usfirst.frc.team2438.robot.commands.CommandBase;
  * Operates winch
  */
 public class OperateWinch extends CommandBase {
+	
+	private final double WINCH_POWER = 1.0;
 
     public OperateWinch() {
         requires(winch);
@@ -17,7 +19,7 @@ public class OperateWinch extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	winch.setPower(1.0);
+    	winch.setPower(WINCH_POWER);
     }
 
     // Make this return true when this Command no longer needs to run execute()

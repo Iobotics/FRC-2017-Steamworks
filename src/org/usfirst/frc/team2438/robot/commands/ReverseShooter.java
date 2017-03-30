@@ -4,6 +4,8 @@ package org.usfirst.frc.team2438.robot.commands;
  * Shoots balls
  */
 public class ReverseShooter extends CommandBase {
+	
+	private final double POWER_MULTIPLIER = 0.6;
 
     public ReverseShooter() {
         // Use requires() here to declare subsystem dependencies
@@ -16,7 +18,7 @@ public class ReverseShooter extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setShooterRPM(-shooter.MAX_RPM * 0.6);
+    	shooter.setShooterRPM(-shooter.MAX_RPM * POWER_MULTIPLIER);
     	shooter.runShooter();
     }
 

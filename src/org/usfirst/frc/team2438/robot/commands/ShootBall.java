@@ -4,6 +4,8 @@ package org.usfirst.frc.team2438.robot.commands;
  * Shoots balls
  */
 public class ShootBall extends CommandBase {
+	
+	private final double RPM_VARIATION = 125.0;
 
     public ShootBall() {
         // Use requires() here to declare subsystem dependencies
@@ -16,7 +18,8 @@ public class ShootBall extends CommandBase {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	shooter.setShooterRPM(shooter.MAX_RPM + (-oi.getRightStick().getZ() * 125.0));
+    	//
+    	shooter.setShooterRPM(shooter.MAX_RPM + (-oi.getRightStick().getZ() * RPM_VARIATION));
     	shooter.runShooter();
     }
 
