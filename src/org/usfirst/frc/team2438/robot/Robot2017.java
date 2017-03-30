@@ -2,16 +2,20 @@ package org.usfirst.frc.team2438.robot;
 
 import org.usfirst.frc.team2438.robot.commands.CalibrateNavigationSensor;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoDriveStraight;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoGearAndShoot;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoPlaceGear;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoPlaceGear.GearPosition;
 import org.usfirst.frc.team2438.robot.subsystems.Shooter;
 import org.usfirst.frc.team2438.robot.util.Utility;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.PowerDistributionPanel;
 import edu.wpi.first.wpilibj.Preferences;
+import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PrintCommand;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
@@ -22,15 +26,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * directory.
  */
 public class Robot2017 extends IterativeRobot {
+	Command _autoCommand;
 	PowerDistributionPanel _pdp;
+	Shooter 			   _shooter;
 	Preferences            _prefs;
-	
-	Shooter shooter;
-	
-	final String defaultAuto = "Default";
-	final String customAuto = "Auto 1";
-	String autoSelected;
-	SendableChooser<String> chooser = new SendableChooser<>();
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -39,7 +38,6 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void robotInit() {
 		_pdp = new PowerDistributionPanel();
-    	
     	_pdp.clearStickyFaults();
     	
     	_prefs = Preferences.getInstance();
@@ -48,10 +46,6 @@ public class Robot2017 extends IterativeRobot {
     	new CalibrateNavigationSensor().start();
     	
     	this.displayPreferences();
-		
-		chooser.addDefault("Default Auto", defaultAuto);
-		chooser.addObject("Auto 1", customAuto);
-		SmartDashboard.putData("Auto choices", chooser);
 	}
 	
 	/**
@@ -64,6 +58,11 @@ public class Robot2017 extends IterativeRobot {
     
 	public void disabledPeriodic() {
 		Scheduler.getInstance().run();
+		
+		int autonum = _prefs.getInt("auto-program-number", 0);
+    	SmartDashboard.putNumber("auto-num", autonum);
+    	
+    	this.debugStuff();
 	}
 
 	/**
@@ -77,8 +76,21 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
-		autoSelected = chooser.getSelected();
-		System.out.println("Auto selected: " + autoSelected);
+		int autonum = _prefs.getInt("auto-program-number", 0);
+    	SmartDashboard.putNumber("auto-num", autonum);
+    	// pick auto command via program number //
+    	switch(autonum) {
+    		case 0: _autoCommand = new PrintCommand("Nihilism: Never Not Nothing"); break;
+    		case 1: _autoCommand = new AutoGearAndShoot(GearPosition.LEFT); break;
+    		case 2: _autoCommand = new AutoGearAndShoot(GearPosition.CENTER); break;
+    		case 3: _autoCommand = new AutoGearAndShoot(GearPosition.RIGHT); break;
+    		case 4: _autoCommand = new AutoPlaceGear(GearPosition.LEFT); break;
+    		case 5: _autoCommand = new AutoPlaceGear(GearPosition.CENTER); break;
+    		case 6: _autoCommand = new AutoPlaceGear(GearPosition.RIGHT); break;
+    		case 7: _autoCommand = new AutoDriveStraight(65); break;
+    		default: _autoCommand = null; break;
+    	}
+    	if(_autoCommand != null) _autoCommand.start();
 	}
 
 	/**
@@ -87,10 +99,19 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void autonomousPeriodic() {
 		Scheduler.getInstance().run();
+		
+		this.debugStuff();
 	}
 	
 	@Override
 	public void teleopInit() {
+		System.out.println("hello");
+		// This makes sure that the autonomous stops running when
+        // teleop starts running. If you want the autonomous to 
+        // continue until interrupted by another command, remove
+        // this line or comment it out.
+        if (_autoCommand != null) _autoCommand.cancel();
+		
 		CommandBase.shooter.resetShooter();
 		this.setPreferences();
 		this.displayPreferences();
@@ -102,6 +123,7 @@ public class Robot2017 extends IterativeRobot {
 	@Override
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		
 		this.debugStuff();
 	}
 
@@ -122,49 +144,46 @@ public class Robot2017 extends IterativeRobot {
 		CommandBase.intake.debug();
 		CommandBase.winch.debug();
 		CommandBase.navsensor.debug();
-		
-		SmartDashboard.putNumber("Battery voltage", DriverStation.getInstance().getBatteryVoltage());
-		SmartDashboard.putNumber("Total current", _pdp.getTotalCurrent());
 	}
 	
 	/**
 	 * Display robot preferences
 	 */
 	public void displayPreferences() {
-		shooter = CommandBase.shooter;
+		_shooter = CommandBase.shooter;
 		
-		_prefs.putDouble("Shooter RPM", shooter.getShooterRPM());
-		_prefs.putDouble("iZone", shooter.getIZone());
-		_prefs.putDouble("kF", shooter.getF());
-		_prefs.putDouble("kP", shooter.getP());
-		_prefs.putDouble("kI", shooter.getI());
-		_prefs.putDouble("kD", shooter.getD());
+		_prefs.putDouble("Shooter RPM", _shooter.getShooterRPM());
+		_prefs.putDouble("iZone", _shooter.getIZone());
+		_prefs.putDouble("kF", _shooter.getF());
+		_prefs.putDouble("kP", _shooter.getP());
+		_prefs.putDouble("kI", _shooter.getI());
+		_prefs.putDouble("kD", _shooter.getD());
 	}
 	
 	/**
 	 * Set robot preferences
 	 */
 	public void setPreferences() {
-		double rpm = _prefs.getDouble("Shooter RPM", shooter.getShooterRPM());
-		int iZone = _prefs.getInt("iZone", shooter.getIZone());
-		double kF = _prefs.getDouble("kF", shooter.getF());
-		double kP = _prefs.getDouble("kP", shooter.getP());
-		double kI = _prefs.getDouble("kI", shooter.getI());
-		double kD = _prefs.getDouble("kD", shooter.getD());
+		double rpm = _prefs.getDouble("Shooter RPM", _shooter.getShooterRPM());
+		int iZone = _prefs.getInt("iZone", _shooter.getIZone());
+		double kF = _prefs.getDouble("kF", _shooter.getF());
+		double kP = _prefs.getDouble("kP", _shooter.getP());
+		double kI = _prefs.getDouble("kI", _shooter.getI());
+		double kD = _prefs.getDouble("kD", _shooter.getD());
 		
-		rpm = Utility.window(rpm, 0, shooter.MAX_RPM);
-		iZone = Utility.window(iZone, 0, shooter.MAX_IZONE);
-		kF = Utility.window(kF, 0, shooter.MAX_KF);
-		kP = Utility.window(kP, 0, shooter.MAX_KP);
-		kI = Utility.window(kI, 0, shooter.MAX_KI);
-		kD = Utility.window(kD, 0, shooter.MAX_KD);
+		rpm = Utility.window(rpm, 0, _shooter.MAX_RPM);
+		iZone = Utility.window(iZone, 0, _shooter.MAX_IZONE);
+		kF = Utility.window(kF, 0, _shooter.MAX_KF);
+		kP = Utility.window(kP, 0, _shooter.MAX_KP);
+		kI = Utility.window(kI, 0, _shooter.MAX_KI);
+		kD = Utility.window(kD, 0, _shooter.MAX_KD);
 		
-		shooter.setShooterRPM(rpm);
-		shooter.setIZone(iZone);
-		shooter.setF(kF);
-		shooter.setP(kP);
-		shooter.setI(kI);
-		shooter.setD(kD);
+		_shooter.setShooterRPM(rpm);
+		_shooter.setIZone(iZone);
+		_shooter.setF(kF);
+		_shooter.setP(kP);
+		_shooter.setI(kI);
+		_shooter.setD(kD);
 	}
 }
 
