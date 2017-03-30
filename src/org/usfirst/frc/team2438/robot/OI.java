@@ -31,8 +31,8 @@ public class OI {
 	private final Button _agitatorButton = new JoystickButton(_lStick, 3);
 	private final Button _agitatorRevButton = new JoystickButton(_lStick, 4);
 	
-	private final Button _retractWinchButton = new JoystickButton(_lStick, 10);
-	private final Button _operateWinchButton = new JoystickButton(_lStick, 2);
+	private final Button _retractWinchButton = new JoystickButton(_lStick, 2);
+	private final Button _operateWinchButton = new JoystickButton(_lStick, 10);
 	
 	private final Button _shooterButton = new JoystickButton(_rStick, 3);
 	private final Button _shooterRevButton = new JoystickButton(_rStick, 4);
@@ -44,8 +44,8 @@ public class OI {
         _agitatorButton.whileHeld(new ActivateAgitator(-100.0)); // lStick 3
         _agitatorRevButton.toggleWhenPressed(new ActivateAgitator(100.0)); // lStick 4
         
-        _retractWinchButton.whileHeld(new RetractWinch()); // lStick 10
-        _operateWinchButton.whileHeld(new OperateWinch()); // lStick 2
+        _retractWinchButton.whileHeld(new RetractWinch()); // lStick 2
+        _operateWinchButton.whileHeld(new OperateWinch()); // lStick 10
         
         _shooterButton.whileHeld(new ShootBall()); // rStick 3
         _shooterRevButton.whileHeld(new ReverseShoot()); // rStick 4
