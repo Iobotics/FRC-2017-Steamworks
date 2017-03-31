@@ -15,21 +15,21 @@ public class AutoGearAndShoot extends CommandGroup {
     	switch(position) {
     		case LEFT:
     			this.addSequential(new AutoTurn(-30));
-    			this.addSequential(new AutoDriveStraight(20));
+    			this.addSequential(new AutoDriveStraight(60));
     			this.addSequential(new AutoTurn(-90));
-    			this.addSequential(new AutoDriveStraight(45));
+    			this.addSequential(new AutoDriveStraight(100));
     			break;
     		case CENTER:
     			this.addSequential(new AutoTurn(90));
-    			this.addSequential(new AutoDriveStraight(30));
+    			this.addSequential(new AutoDriveStraight(120));
     			this.addSequential(new AutoTurn(-45));
-    			this.addSequential(new AutoDriveStraight(15));
+    			this.addSequential(new AutoDriveStraight(40));
     			break;
     		case RIGHT:
     			this.addSequential(new AutoTurn(30));
-    			this.addSequential(new AutoDriveStraight(35));
+    			this.addSequential(new AutoDriveStraight(120));
     			this.addSequential(new AutoTurn(-90));
-    			this.addSequential(new AutoDriveStraight(10));
+    			this.addSequential(new AutoDriveStraight(25));
     			break;
     	}
     }

@@ -76,6 +76,8 @@ public class Robot2017 extends IterativeRobot {
 	 */
 	@Override
 	public void autonomousInit() {
+		CommandBase.drivetrain.setLeftEncoderDistance(0.0);
+		CommandBase.drivetrain.setRightEncoderDistance(0.0);
 		int autonum = _prefs.getInt("auto-program-number", 0);
     	SmartDashboard.putNumber("auto-num", autonum);
     	// pick auto command via program number //
@@ -87,7 +89,7 @@ public class Robot2017 extends IterativeRobot {
     		case 4: _autoCommand = new AutoPlaceGear(GearPosition.LEFT); break;
     		case 5: _autoCommand = new AutoPlaceGear(GearPosition.CENTER); break;
     		case 6: _autoCommand = new AutoPlaceGear(GearPosition.RIGHT); break;
-    		case 7: _autoCommand = new AutoDriveStraight(250); break;
+    		case 7: _autoCommand = new AutoDriveStraight(290); break;
     		default: _autoCommand = null; break;
     	}
     	if(_autoCommand != null) _autoCommand.start();
@@ -139,6 +141,7 @@ public class Robot2017 extends IterativeRobot {
 	 * Subsystem debuggers
 	 */
 	public void debugStuff() {
+		CommandBase.drivetrain.debug();
 		CommandBase.shooter.debug();
 		CommandBase.agitator.debug();
 		CommandBase.intake.debug();

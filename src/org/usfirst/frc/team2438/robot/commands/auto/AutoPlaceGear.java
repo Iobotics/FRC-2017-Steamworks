@@ -18,20 +18,19 @@ public class AutoPlaceGear extends CommandGroup {
     public AutoPlaceGear(GearPosition position) {        
         switch(position) {
 			case LEFT:
-				this.addSequential(new AutoDriveStraight(-35));
+				this.addSequential(new AutoDriveStraight(-160));
 				this.addSequential(new AutoTurn(-60));
-				this.addSequential(new AutoDriveStraight(-8));
-				this.addSequential(new AutoDriveStraight(8));
+				this.addSequential(new AutoDriveStraight(-20));
+				this.addSequential(new AutoDriveStraight(20));
 				break;
 			case CENTER:
-				this.addSequential(new AutoDriveStraight(-114));
-				this.addSequential(new AutoDriveStraight(30));
+				this.addSequential(new AutoDriveStraight(-160, 0.35));
 				break;
 			case RIGHT:
-				this.addSequential(new AutoDriveStraight(-35));
+				this.addSequential(new AutoDriveStraight(-160));
 				this.addSequential(new AutoTurn(60));
-				this.addSequential(new AutoDriveStraight(-8));
-				this.addSequential(new AutoDriveStraight(4));
+				this.addSequential(new AutoDriveStraight(-20));
+				this.addSequential(new AutoDriveStraight(10));
 				break;
         }
     }
