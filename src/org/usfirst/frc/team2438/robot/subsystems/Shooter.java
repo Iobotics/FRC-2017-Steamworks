@@ -24,7 +24,7 @@ public class Shooter extends Subsystem {
 	private double kI = 0.0;
 	private double kD = 0.0;
 	
-	public final double MAX_RPM = 3400.0;
+	public final double MAX_RPM = 3600.0;
 	
 	public final int MAX_IZONE = (int) Math.round(iZone * 1.2);
 	public final double MAX_KF = kF * 1.5;
@@ -123,6 +123,7 @@ public class Shooter extends Subsystem {
 	
     public void debug() {
     	SmartDashboard.putNumber("Shooter RPM", _shooter.getSpeed());
+    	SmartDashboard.putNumber("Shooter current", _shooter.getOutputCurrent());
     }
 }
 

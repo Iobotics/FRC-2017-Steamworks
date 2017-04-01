@@ -3,15 +3,17 @@ package org.usfirst.frc.team2438.robot.commands.auto;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * FIXME - WIP
+ * Drive and shoot balls
  */
 public class AutoDriveAndShoot extends CommandGroup {
 
     public AutoDriveAndShoot() {
-    	this.addSequential(new AutoDriveStraight(90, 0.35, 5));
-    	//this.addSequential(new AutoTurn(-90));
-        //this.addSequential(new AutoDriveStraight(10, 0.35));
-        //this.addSequential(new AutoShootBall(6));
+    	this.addSequential(new AutoDriveStraight(107));
+    	this.addSequential(new AutoTurn(90));
+        this.addSequential(new AutoDriveStraight(107));
+        this.addSequential(new AutoTurn(90));
+        this.addSequential(new AutoDriveStraight(87));
+        this.addSequential(new AutoShootBall(10));
     }
     
 }

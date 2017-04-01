@@ -22,7 +22,7 @@ public class AutoTurn extends CommandBase implements PIDOutput {
 	private static final double kD = 0.0;
 	
 	/**
-	 * CCW - Positive, CW - Negative
+	 * CCW - Negative, CW - Positive
 	 * @param degrees
 	 */
 	public AutoTurn(double degrees) {
@@ -30,7 +30,7 @@ public class AutoTurn extends CommandBase implements PIDOutput {
 	}
 	
 	/**
-	 * CCW - Positive, CW - Negative
+	 * CCW - Negative, CW - Positive
 	 * @param degrees
 	 * @param resetGyro
 	 */

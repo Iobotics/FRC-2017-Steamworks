@@ -2,10 +2,14 @@ package org.usfirst.frc.team2438.robot;
 
 import org.usfirst.frc.team2438.robot.commands.CalibrateNavigationSensor;
 import org.usfirst.frc.team2438.robot.commands.CommandBase;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoDriveAndShoot;
 import org.usfirst.frc.team2438.robot.commands.auto.AutoDriveStraight;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoGearAndLine;
 import org.usfirst.frc.team2438.robot.commands.auto.AutoGearAndShoot;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoGearShootAndLine;
 import org.usfirst.frc.team2438.robot.commands.auto.AutoPlaceGear;
 import org.usfirst.frc.team2438.robot.commands.auto.AutoPlaceGear.GearPosition;
+import org.usfirst.frc.team2438.robot.commands.auto.AutoTurn;
 import org.usfirst.frc.team2438.robot.subsystems.Shooter;
 import org.usfirst.frc.team2438.robot.util.Utility;
 
@@ -83,13 +87,16 @@ public class Robot2017 extends IterativeRobot {
     	// pick auto command via program number //
     	switch(autonum) {
     		case 0: _autoCommand = new PrintCommand("Nihilism: Never Not Nothing"); break;
-    		case 1: _autoCommand = new AutoGearAndShoot(GearPosition.LEFT); break;
-    		case 2: _autoCommand = new AutoGearAndShoot(GearPosition.CENTER); break;
-    		case 3: _autoCommand = new AutoGearAndShoot(GearPosition.RIGHT); break;
-    		case 4: _autoCommand = new AutoPlaceGear(GearPosition.LEFT); break;
-    		case 5: _autoCommand = new AutoPlaceGear(GearPosition.CENTER); break;
-    		case 6: _autoCommand = new AutoPlaceGear(GearPosition.RIGHT); break;
-    		case 7: _autoCommand = new AutoDriveStraight(290); break;
+    		case 1: _autoCommand = new AutoDriveStraight(290); break;
+    		case 2: _autoCommand = new AutoPlaceGear(GearPosition.CENTER); break;
+    		case 3: _autoCommand = new AutoGearAndLine(GearPosition.CENTER); break;
+    		case 4: _autoCommand = new AutoDriveAndShoot(); break;
+    		case 5: _autoCommand = new AutoGearAndLine(GearPosition.RIGHT); break;
+    		case 6: _autoCommand = new AutoDriveStraight(266); break;
+    		case 7: _autoCommand = new AutoGearAndShoot(GearPosition.LEFT); break;
+    		case 8: _autoCommand = new AutoGearShootAndLine(); break;
+    		case 9: _autoCommand = new AutoPlaceGear(GearPosition.RIGHT); break;
+    		case 10: _autoCommand = new AutoTurn(30); break;
     		default: _autoCommand = null; break;
     	}
     	if(_autoCommand != null) _autoCommand.start();
